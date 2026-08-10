@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../site"
+import { SITE } from '../site'
 
 interface Props {
   title?: string
@@ -15,35 +15,34 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<meta name="author" content={SITE.author} />
-		<meta name="theme-color" content="#000000" />
-		<link rel="canonical" href={pageUrl} />
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={SITE.title} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={SITE.author} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <!-- TODO: add og:image, switch twitter:card to summary_large_image once a 1200x630 asset exists -->
-		<meta property="og:url" content={pageUrl} />
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
-		<!-- Cloudflare Web Analytics -->
-		<script
-			is:inline
-			type="module"
-			src="https://static.cloudflareinsights.com/beacon.min.js"
-			data-cf-beacon='{"token": "0ee08bcadc624293aedd76e737ddd60b"}'
-		></script>
-		<!-- End Cloudflare Web Analytics -->
-	</head>
+    <meta property="og:url" content={pageUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <!-- Cloudflare Web Analytics -->
+    <script
+      is:inline
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "0ee08bcadc624293aedd76e737ddd60b"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+  </head>
 
-	<body>
-		<slot />
-	</body>
+  <body>
+    <slot />
+  </body>
 </html>
