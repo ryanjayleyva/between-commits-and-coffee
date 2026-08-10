@@ -1,7 +1,11 @@
 {
   "name": "between-commits-and-coffee",
-  "type": "module",
+  "description": "Practical notes on full-stack development, Neovim, integrations, and automation, written between commits.",
+  "author": "RJ Leyva <rjleyva@tuta.io>",
   "version": "0.0.1",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
   "engines": {
     "node": ">=22.12.0"
   },
@@ -9,9 +13,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler deploy",
+    "cf:dev": "astro build && wrangler dev"
   },
   "dependencies": {
     "astro": "^7.2.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.120.0"
   }
 }

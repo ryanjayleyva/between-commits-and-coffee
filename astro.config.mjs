@@ -1,5 +1,11 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // TODO: replace with https://rjleyva.com once own the domain
+  site: "https://bcc.rjleyva-045.workers.dev",
+  server: {
+    port: 3000,
+    host: true,
+  },
+});
