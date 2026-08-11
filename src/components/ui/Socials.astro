@@ -1,0 +1,58 @@
+---
+interface SocialLink {
+  label: string
+  href: string
+}
+
+interface Props {
+  links?: SocialLink[]
+}
+
+const SOCIAL_LINKS: SocialLink[] = [
+  { label: 'Codeberg', href: 'https://codeberg.org/rjl' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ryanjayleyva' },
+  { label: 'Instagram', href: 'https://www.instagram.com/slammedwigo' },
+]
+
+const { links = SOCIAL_LINKS } = Astro.props
+---
+
+<ul class="socials" role="list">
+  {
+    links.map(({ label, href }) => (
+      <li class="socials__item">
+        <a
+          class="socials__link"
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${label} (opens in new tab)`}
+        >
+          {label}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .socials__link {
+    text-decoration: none;
+  }
+
+  .socials__link:hover,
+  .socials__link:focus-visible {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    outline: 0;
+  }
+</style>
