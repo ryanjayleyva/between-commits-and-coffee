@@ -1,0 +1,27 @@
+@layer prose {
+  .prose {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--color-text-muted);
+    color: var(--color-text-muted);
+    font-style: italic;
+    padding-left: 1rem;
+    margin: 0;
+  }
+
+  pre.shiki {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  pre.shiki code {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}

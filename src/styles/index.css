@@ -1,5 +1,6 @@
-@layer normalize, base, themes;
+@layer normalize, base, themes, prose;
 
 @import 'modern-normalize' layer(normalize);
 @import './base.css';
 @import './themes.css';
+@import './prose.css';
