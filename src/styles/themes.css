@@ -1,0 +1,24 @@
+@layer themes {
+  :root {
+    --color-bg: #1c1917;
+    --color-surface: #25211f;
+    --color-surface-raised: #37312f;
+    --color-text: #b4bdc3;
+    --color-text-muted: #766b66;
+    --color-link: #4f6e86;
+    --color-link-hover: #6099c0;
+    --color-info: #6099c0;
+    --color-info-muted: #4f6e86;
+    --color-danger: #de6e7c;
+    --color-danger-muted: #a84a56;
+    --color-success: #819b69;
+    --color-success-muted: #606f52;
+    --color-warning: #b77e64;
+    --color-warning-muted: #7e5b4d;
+    --color-cyan: #66a5ad;
+    --color-cyan-muted: #54787d;
+    --color-magenta: #b279a7;
+    --color-magenta-muted: #7a5973;
+    color-scheme: dark;
+  }
+}
