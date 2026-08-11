@@ -1,10 +1,4 @@
 @layer prose {
-  .prose {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
   blockquote {
     border-left: 4px solid var(--color-text-muted);
     color: var(--color-text-muted);

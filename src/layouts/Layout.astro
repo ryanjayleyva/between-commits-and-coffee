@@ -49,8 +49,16 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
 
   <body>
     <SkipLink />
-    <main id="main-content">
+    <main id="main-content" class="page">
       <slot />
     </main>
   </body>
 </html>
+
+<style>
+  .page {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+</style>
