@@ -1,0 +1,32 @@
+---
+import Socials from './Socials.astro'
+
+interface Props {
+  heading: string
+  subHeading: string
+}
+
+const { heading, subHeading } = Astro.props
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <h1 class="hero__heading" id="hero-heading">
+    {heading}
+  </h1>
+  <p class="hero__subheading">{subHeading}</p>
+  <Socials />
+</section>
+
+<style>
+  .hero {
+    padding-block-start: 4rem;
+  }
+
+  .hero__heading {
+    margin-bottom: 0;
+  }
+
+  .hero__subheading {
+    margin-top: 0;
+  }
+</style>
