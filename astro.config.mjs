@@ -1,7 +1,19 @@
 // @ts-check
-import { defineConfig } from 'astro/config'
+import { defineConfig, fontProviders } from 'astro/config'
 
 export default defineConfig({
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist',
+      cssVariable: '--font-geist',
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Geist Mono',
+      cssVariable: '--font-geist-mono',
+    },
+  ],
   // TODO: replace with https://rjleyva.com once own the domain
   site: 'https://bcc.rjleyva-045.workers.dev',
   server: {
