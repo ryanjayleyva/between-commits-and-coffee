@@ -1,5 +1,8 @@
 ---
+import { Font } from 'astro:assets'
+import SkipLink from '@/components/ui/SkipLink.astro'
 import { SITE } from '../site'
+import '../styles/index.css'
 
 interface Props {
   title?: string
@@ -17,12 +20,12 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={SITE.author} />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#1c1917" />
     <link rel="canonical" href={pageUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.title} />
@@ -40,9 +43,14 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
       src="https://static.cloudflareinsights.com/beacon.min.js"
       data-cf-beacon='{"token": "0ee08bcadc624293aedd76e737ddd60b"}'></script>
     <!-- End Cloudflare Web Analytics -->
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" preload />
   </head>
 
   <body>
-    <slot />
+    <SkipLink />
+    <main id="main-content">
+      <slot />
+    </main>
   </body>
 </html>

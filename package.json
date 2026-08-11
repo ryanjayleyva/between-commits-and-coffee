@@ -23,7 +23,8 @@
     "cf:dev": "astro build && wrangler dev"
   },
   "dependencies": {
-    "astro": "^7.2.0"
+    "astro": "^7.2.0",
+    "modern-normalize": "^3.0.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
