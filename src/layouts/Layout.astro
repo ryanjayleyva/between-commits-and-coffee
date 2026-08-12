@@ -1,8 +1,8 @@
 ---
 import { Font } from 'astro:assets'
 import SkipLink from '@/components/ui/SkipLink.astro'
-import { SITE } from '../site'
-import '../styles/index.css'
+import { getAnalyticsToken, SITE } from '@/lib/site'
+import '@/styles/index.css'
 
 interface Props {
   title?: string
@@ -14,6 +14,7 @@ const { title, description } = Astro.props
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title
 const pageDescription = description ?? SITE.description
 const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
+const analyticsToken = getAnalyticsToken()
 ---
 
 <!doctype html>
@@ -36,13 +37,20 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <!-- Cloudflare Web Analytics -->
-    <script
-      is:inline
-      type="module"
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "0ee08bcadc624293aedd76e737ddd60b"}'></script>
-    <!-- End Cloudflare Web Analytics -->
+    {
+      analyticsToken && (
+        <>
+          {/* Cloudflare Web Analytics */}
+          <script
+            is:inline
+            type="module"
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${analyticsToken}"}`}
+          />
+          {/* End Cloudflare Web Analytics */}
+        </>
+      )
+    }
     <Font cssVariable="--font-geist" preload />
     <Font cssVariable="--font-geist-mono" preload />
   </head>
