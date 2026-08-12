@@ -6,3 +6,8 @@ export const SITE = {
   // TODO: replace with https://rjleyva.com once own the domain
   url: 'https://bcc.rjleyva-045.workers.dev',
 } as const
+
+export function getAnalyticsToken(): string | undefined {
+  const env = import.meta.env as Record<string, string | undefined>
+  return env.PUBLIC_CF_ANALYTICS_TOKEN
+}
