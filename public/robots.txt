@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Repo-root paths that must never be indexed if misconfiguration exposes them.
+# These files are not copied into dist/; these rules are defense-in-depth only.
+Disallow: /.env
+Disallow: /.env.*
+Disallow: /.git/
+Disallow: /.astro/
+Disallow: /.wrangler/
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Enable once @astrojs/sitemap is added:
+# Sitemap: https://bcc.rjleyva-045.workers.dev/sitemap-index.xml
