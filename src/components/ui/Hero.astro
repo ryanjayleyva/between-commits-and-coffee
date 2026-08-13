@@ -1,11 +1,12 @@
 ---
+import type { PostLink } from '@/lib/content'
 import PostLinks from './PostLinks.astro'
 import Socials from './Socials.astro'
 
 interface Props {
   heading: string
   subHeading: string
-  postLinks?: { title: string; href: string }[]
+  postLinks?: PostLink[]
 }
 
 const { heading, subHeading, postLinks } = Astro.props
@@ -26,10 +27,14 @@ const { heading, subHeading, postLinks } = Astro.props
   }
 
   .hero__heading {
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
 
   .hero__subheading {
     margin-top: 0;
+  }
+
+  .hero :global(.socials) {
+    margin-top: 2rem;
   }
 </style>
