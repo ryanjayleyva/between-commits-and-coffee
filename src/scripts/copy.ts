@@ -14,10 +14,9 @@ const fallbackCopy = (text: string): boolean => {
   let success = false
   try {
     // Fall back to execCommand for browsers without the Clipboard API.
-    const execCommand = (
+    success = (
       document as unknown as { execCommand(commandId: string): boolean }
-    ).execCommand
-    success = execCommand('copy')
+    ).execCommand('copy')
   } catch {
     success = false
   }
