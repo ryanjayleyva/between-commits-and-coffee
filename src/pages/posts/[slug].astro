@@ -1,0 +1,58 @@
+---
+import { render } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+import { formatDate, getPosts, type Post } from '@/lib/content'
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }))
+}
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const updatedDate = post.data.updated ?? post.data.published
+const showUpdated =
+  post.data.updated !== undefined &&
+  updatedDate.valueOf() !== post.data.published.valueOf()
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <article class="post">
+    <h1 class="post__title">{post.data.title}</h1>
+    <p class="post__description">{post.data.description}</p>
+    <p class="post__meta">
+      Published {formatDate(post.data.published)}
+      {
+        showUpdated && (
+          <>
+            <br />
+            Updated {formatDate(updatedDate)}
+          </>
+        )
+      }
+    </p>
+    <Content />
+  </article>
+</Layout>
+
+<style>
+  .post__meta {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-block-start: 1rem;
+    margin-block-end: 0;
+  }
+
+  .post__description {
+    margin-block-end: 0;
+    color: var(--color-text-muted);
+  }
+</style>

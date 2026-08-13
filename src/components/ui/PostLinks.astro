@@ -1,0 +1,43 @@
+---
+import type { PostLink } from '@/lib/content'
+
+interface Props {
+  links?: PostLink[]
+}
+
+const { links = [] } = Astro.props
+---
+
+{
+  links.length > 0 && (
+    <ul class="post-links" role="list">
+      {links.map(({ title, href }) => (
+        <li class="post-links__item">
+          <a class="post-links__link" href={href}>
+            {title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .post-links {
+    list-style: none;
+    margin-top: 2rem;
+    padding: 0;
+  }
+
+  .post-links__link {
+    text-decoration: none;
+  }
+
+  .post-links__link:hover,
+  .post-links__link:focus-visible {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    outline: 0;
+  }
+</style>

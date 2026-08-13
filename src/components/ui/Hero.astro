@@ -1,12 +1,14 @@
 ---
+import PostLinks from './PostLinks.astro'
 import Socials from './Socials.astro'
 
 interface Props {
   heading: string
   subHeading: string
+  postLinks?: { title: string; href: string }[]
 }
 
-const { heading, subHeading } = Astro.props
+const { heading, subHeading, postLinks } = Astro.props
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
@@ -15,6 +17,7 @@ const { heading, subHeading } = Astro.props
   </h1>
   <p class="hero__subheading">{subHeading}</p>
   <Socials />
+  <PostLinks links={postLinks} />
 </section>
 
 <style>
