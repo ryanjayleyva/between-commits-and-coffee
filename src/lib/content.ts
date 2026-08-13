@@ -6,6 +6,7 @@ export type Post = CollectionEntry<'posts'>
 export interface PostLink {
   title: string
   href: string
+  date: Date
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -23,6 +24,7 @@ export function toPostLink(post: Post): PostLink {
   return {
     title: post.data.title,
     href: `/posts/${post.id}/`,
+    date: post.data.published,
   }
 }
 
@@ -31,9 +33,22 @@ export function toPostLinks(posts: Post[]): PostLink[] {
 }
 
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  })
+  }).format(date)
+}
+
+export function formatShortDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date)
+}
+
+export function formatIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10)
 }
