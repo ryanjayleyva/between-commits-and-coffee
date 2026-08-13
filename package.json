@@ -19,8 +19,8 @@
     "format:check": "prettier --check \"src/**/*.{astro,css,js,jsx,ts,tsx,json}\" \"*.{ts,mjs,json,jsonc,md}\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "deploy": "astro build && wrangler deploy",
-    "cf:dev": "astro build && wrangler dev"
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf:dev": "pnpm run build && wrangler dev"
   },
   "dependencies": {
     "astro": "^7.2.0",
