@@ -24,7 +24,12 @@ const showUpdated =
   updatedDate.valueOf() !== post.data.published.valueOf()
 ---
 
-<Layout title={post.data.title} description={post.data.description}>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  published={post.data.published}
+  updated={post.data.updated}
+>
   <article class="post">
     <h1 class="post__title">{post.data.title}</h1>
     <p class="post__description">{post.data.description}</p>
