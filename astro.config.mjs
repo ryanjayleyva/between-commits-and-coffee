@@ -14,6 +14,11 @@ export default defineConfig({
       cssVariable: '--font-geist-mono',
     },
   ],
+  markdown: {
+    shikiConfig: {
+      theme: 'gruvbox-dark-medium',
+    },
+  },
   // TODO: replace with https://rjleyva.com once own the domain
   site: 'https://bcc.rjleyva-045.workers.dev',
   server: {
