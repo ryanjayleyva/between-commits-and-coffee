@@ -1,5 +1,6 @@
 ---
 import type { PostLink } from '@/lib/content'
+import { formatShortDate } from '@/lib/content'
 
 interface Props {
   links?: PostLink[]
@@ -10,23 +11,55 @@ const { links = [] } = Astro.props
 
 {
   links.length > 0 && (
-    <ul class="post-links" role="list">
-      {links.map(({ title, href }) => (
-        <li class="post-links__item">
-          <a class="post-links__link" href={href}>
-            {title}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div class="post-links">
+      <p class="post-links__label">{new Date().getFullYear()}</p>
+      <ul class="post-links__list" role="list">
+        {links.map(({ title, href, date }) => (
+          <li class="post-links__item">
+            <span class="post-links__index">{formatShortDate(date)}</span>
+            <a class="post-links__link" href={href}>
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
 <style>
   .post-links {
+    margin-top: 3rem;
+    border-top: 1px solid var(--color-surface-raised);
+  }
+
+  .post-links__label {
+    margin: 1.5rem 0 1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+  }
+
+  .post-links__list {
+    display: grid;
+    gap: 0.75rem;
     list-style: none;
-    margin-top: 2rem;
+    margin: 0;
     padding: 0;
+  }
+
+  .post-links__item {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+
+  .post-links__index {
+    color: var(--color-text-muted);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.85rem;
   }
 
   .post-links__link {
