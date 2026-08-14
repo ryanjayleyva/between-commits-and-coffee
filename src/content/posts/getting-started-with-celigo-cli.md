@@ -215,7 +215,16 @@ In this example, the active profile is `default`.
 The `base_url` specifies the integrator.io API endpoint the CLI will communicate
 with.
 
-The `api_token` is used to authenticate requests against that environment.
+The `api_token` is used to authenticate requests against that environment. You
+create and manage these tokens in the integrator.io app at
+[https://integrator.io/accesstokens](https://integrator.io/accesstokens).
+
+There are two kinds of token:
+
+| Token type                  | When to use                                                                                                                                                                                              |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Personal access token (PAT) | Tied to your own user and carries the same permissions you do. The quickest option for a developer working with the CLI day to day.                                                                      |
+| Account API token           | Created by an owner or administrator and can be limited to a specific set of resources instead of the whole account. Prefer it for automation that needs to keep working beyond any one person's access. |
 
 The `default_format` controls how command results are displayed in the terminal.
 Setting it to table makes command output easier to read interactively. You can
