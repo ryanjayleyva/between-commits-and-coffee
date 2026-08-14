@@ -30,8 +30,7 @@ export default defineConfig({
       theme: 'gruvbox-dark-medium',
     },
   },
-  // TODO: replace with https://rjleyva.com once own the domain
-  site: 'https://bcc.rjleyva-045.workers.dev',
+  site: 'https://rjleyva.com',
   server: {
     port: 3000,
     host: true,
