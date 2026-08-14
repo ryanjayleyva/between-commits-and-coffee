@@ -1,4 +1,31 @@
 @layer prose {
+  :not(pre) > code {
+    color: var(--color-info-muted);
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--color-surface-raised);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  th {
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  td {
+    color: var(--color-text);
+  }
+
   blockquote {
     border-left: 4px solid var(--color-text-muted);
     color: var(--color-text-muted);
