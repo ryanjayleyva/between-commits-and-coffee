@@ -6,7 +6,7 @@ description:
   integrator.io account, manage profiles, and use basic Celigo CLI commands to
   list integrations and flows.'
 published: August 12, 2026
-updated: August 14, 2026
+updated: August 15, 2026
 ---
 
 The Celigo CLI provides a command-line interface for working with integrator.io
@@ -30,12 +30,50 @@ the rest of this series.
 
 Before installing the Celigo CLI, make sure [Node.js 22](https://nodejs.org/en)
 or later is available in your development environment. The CLI is distributed
-through npm, which is included with Node.js.
+through npm, which is included with Node.js, so the CLI itself is installed the
+same way on macOS, Linux, and Windows. Only the way you install Node.js differs;
+the examples below cover Linux and macOS. On Windows, use the
+[official Node.js installer](https://nodejs.org/en/download).
 
-You can install Node.js using the official installer or a version manager such
-as [Node Version Manager](https://github.com/nvm-sh/nvm).
+You can also install Node.js with a version manager such as
+[Node Version Manager](https://github.com/nvm-sh/nvm), which works on both macOS
+and Linux.
 
-If you use Homebrew, you can install Node.js with:
+### Linux
+
+On Arch-based distributions, you can install Node.js and npm with pacman:
+
+```bash
+sudo pacman -S nodejs npm
+```
+
+On Arch, `nodejs` and `npm` are separate packages, so install both. Arch ships a
+current Node.js release (or an LTS branch such as `nodejs-lts-jod` for Node 22),
+so no third-party repository is required.
+
+On Debian-based distributions such as Ubuntu, you can add the
+[NodeSource repository](https://github.com/nodesource/distributions) and install
+Node.js with apt:
+
+```bash
+sudo apt install -y curl
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo -E bash nodesource_setup.sh
+sudo apt install -y nodejs
+```
+
+On Fedora or RHEL-based distributions, you can install Node.js with dnf:
+
+```bash
+sudo dnf install -y nodejs
+```
+
+> TIP: The Node.js version packaged with your Linux distribution may be older
+> than 22. If so, use nvm or the official Node.js installer instead.
+
+### macOS
+
+On macOS, you can install Node.js with Homebrew:
 
 ```bash
 brew install node
