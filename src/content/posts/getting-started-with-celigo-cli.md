@@ -6,50 +6,20 @@ description:
   integrator.io account, manage profiles, and use basic Celigo CLI commands to
   list integrations and flows.'
 published: August 12, 2026
-updated: August 13, 2026
+updated: August 14, 2026
 ---
 
-In this tutorial, we'll install and configure the Celigo CLI, the command-line
-interface for Celigo integrator.io.
+The Celigo CLI provides a command-line interface for working with integrator.io
+resources. It allows you to manage integrations and flows programmatically and
+incorporate integrator.io configuration into scripts, automation, and
+development workflows.
 
-Integration platforms such as n8n, Zapier, Make, and Trigger.dev help developers
-connect systems and automate data flows across applications. Celigo
-integrator.io is designed for more complex integration environments, where
-workflows often span multiple business systems and need to account for
-reliability, scalability, operational visibility, and long-term maintainability.
+In this guide, we'll install the CLI, configure authentication, create a
+profile, and use the CLI to inspect integrations and flows. We'll also look at
+output formats and the local configuration stored in `~/.celigo/config.json`.
 
-Historically, integrator.io development has been centered around its web
-interface. The web UI provides a practical way to build, configure, and monitor
-integrations, particularly for visual workflows and operational management. As
-integration development becomes more automated and increasingly part of broader
-engineering workflows, developers also need programmatic tools that support
-scripting, repeatability, and automation.
-
-The Celigo CLI extends integrator.io into the command line, making integration
-development easier to incorporate into the tools and practices developers
-already use.
-
-The Celigo CLI and web interface serve different roles within the same
-integration platform. The web interface provides a visual layer for
-configuration, development, and operational management, while the CLI provides a
-programmatic interface for automation and repeatable workflows. This gives
-developers a programmatic way to work with integrator.io alongside the existing
-web interface, particularly when working from the terminal or integrating CLI
-commands into their development environment.
-
-In this guide, we'll install and verify the Celigo CLI, configure the CLI for an
-integrator.io environment, and authenticate using an API token. We'll then
-explore a few of the core commands for working with integrations and flows,
-including celigo integrations list and celigo flows list.
-
-We'll also look at how the CLI formats command output and how to switch between
-JSON and table formats. Finally, we'll examine the local CLI configuration file
-and how profiles and default output formats are defined in
-`~/.celigo/config.json`.
-
-By the end of the guide, you'll have a working Celigo CLI setup and a practical
-understanding of the basic commands and configuration options you'll need to
-start working with integrator.io from the command line.
+By the end, you'll have a working CLI environment and the foundation needed for
+the rest of this series.
 
 > NOTE: You can install and set up the Celigo CLI without a Celigo account.
 > However, you will need an active integrator.io subscription to authenticate
@@ -78,8 +48,6 @@ node --version
 npm --version
 ```
 
-You should see Node.js 22 or later in the output.
-
 ## Installing the Celigo CLI
 
 Once Node.js and npm are available, install the Celigo CLI globally using npm:
@@ -107,27 +75,24 @@ version of the Celigo CLI.
 
 ## AI Coding Agent Skills
 
-The Celigo CLI also installs a set of Celigo-specific skills for supported AI
-coding agents. These skills provide additional context about integrator.io and
-help AI coding tools work with Celigo-specific concepts, configuration, and
-development workflows.
+The Celigo CLI also installs Celigo-specific skills for supported AI coding
+agents. These skills provide context about integrator.io concepts and
+development workflows, allowing supported AI tools to work with Celigo resources
+more effectively.
 
-The CLI makes these skills available to supported AI development environments by
-creating symbolic links to the installed skill definitions. This means the
-skills do not need to be manually copied into each agent's skills directory.
+The CLI installs the skills and creates symbolic links in the agent's skills
+directory. The exact location depends on the AI coding agent you're using.
 
-For example, after installing the CLI, you can inspect the skills directory used
-by an AI coding agent:
+For example, with pi.dev:
 
 ```bash
 ls -la ~/.pi/agent/skills/
 ```
 
-> NOTE: The trailing slash matters on macOS. If the skills directory is a
-> symbolic link, `ls -la ~/.pi/agent/skills` lists the link itself, while
-> `ls -la ~/.pi/agent/skills/` lists the directory contents.
+You should see Celigo-specific skills represented as symbolic links.
 
-You should see the Celigo skills represented as symbolic links:
+> NOTE: The exact set of skills and their installation paths may change between
+> CLI releases and supported AI coding agents.
 
 ```bash
 building-apis -> ../../../.agents/skills/building-apis/
@@ -160,22 +125,6 @@ The `->` notation indicates that these entries are symbolic links rather than
 regular directories. The links point back to the skill definitions installed by
 the Celigo CLI.
 
-The exact skills directory depends on the AI coding agent you use. For example,
-you may find the skills under `~/.pi/agent/skills` for pi.dev.
-
-> NOTE: If you're using a different supported AI coding agent, refer to its
-> documentation to determine where it loads skills from.
-
-You can also verify the links directly:
-
-```bash
-ls -la /path/to/skills/ | grep -E 'building-|configuring-|managing-|writing-'
-```
-
-The CLI currently installs a set of Celigo-specific skills covering areas such
-as integrations, flows, connections, mappings, scripts, APIs, and
-troubleshooting. The exact set may change between Celigo CLI releases.
-
 > IMPORTANT: The Celigo CLI configures AI agent skills during installation. Make
 > sure your AI development tool is installed before installing the Celigo CLI so
 > the installer can detect the available agent environment and create the
@@ -205,6 +154,10 @@ nvim ~/.celigo/config.json
 
 Add or update the configuration so it looks like this:
 
+> IMPORTANT: Treat your API token as a credential. Do not commit
+> `~/.celigo/config.json` to source control or share the file if it contains a
+> valid token.
+
 ```json
 {
   "active_profile": "default",
@@ -219,7 +172,7 @@ Add or update the configuration so it looks like this:
 ```
 
 The `active_profile` property determines which profile the CLI uses by default.
-In this example, the active profile is default.
+In this example, the active profile is `default`.
 
 The `base_url` specifies the integrator.io API endpoint the CLI will communicate
 with.
@@ -236,17 +189,16 @@ changing the configured default. For example:
 
 ```bash
 celigo integrations list --format json
-celigo integrations list --format table
 ```
 
 This allows you to keep table as the default for interactive use while
-requesting JSON when a specific command requires structured output
+requesting JSON when a specific command requires structured output.
 
 If you work with multiple Celigo environments or accounts, you can define
 multiple CLI profiles in the same configuration file.
 
-For example, you can maintain separate profiles for production, another account,
-and a sandbox environment:
+You can maintain separate profiles for production, another account, and a
+sandbox environment:
 
 ```json
 {
@@ -280,7 +232,7 @@ You can switch the active profile without manually editing the configuration
 file:
 
 ```bash
-celigo profile use prod
+celigo profile use eu
 ```
 
 After switching profiles, subsequent commands use the selected profile unless
@@ -292,52 +244,56 @@ settings separate while using the same CLI configuration.
 
 For more information about the available CLI configuration options and supported
 environments, refer to the
-[Celigo CLI Documentation](https://developer.celigo.com/cli)
+[Celigo CLI Documentation](https://developer.celigo.com/cli).
 
-> SECURITY NOTE: Treat your API token as a credential. Do not commit
-> `~/.celigo/config.json` to source control or share the file if it contains a
-> valid token.
+## Querying Integrations and Flows
 
-## Basic Celigo CLI Commands
+With the CLI configured and authenticated, you can use it to inspect and work
+with resources in your integrator.io environment.
 
-With the CLI installed, configured, and authenticated, you can now start working
-with your integrator.io environment directly from the terminal.
-
-To list your integrations, run:
+The primary commands for discovery are:
 
 ```bash
 celigo integrations list
-```
-
-You can control the output format depending on how you want to consume the
-results:
-
-```bash
-celigo integrations list --format json
-celigo integrations list --format table
-```
-
-The `table` format is useful for interactive terminal use, while `json` provides
-structured output that is easier to inspect or process with other tools.
-
-You can use the same approach to inspect your flows:
-
-```bash
 celigo flows list
 ```
 
-Or specify the output format explicitly:
+Both commands support the same output formats:
+
+```bash
+# Human-readable output
+celigo integrations list --format table
+```
+
+```bash
+# Structured output
+celigo integrations list --format json
+```
+
+Use `table` when working interactively in the terminal. Use `json` when the
+output will be consumed by scripts, automation, or other tooling.
+
+The same output options apply to flows:
 
 ```bash
 celigo flows list --format json
-celigo flows list --format table
 ```
 
-At this point, the CLI is installed, authenticated, and ready to interact with
-your integrator.io environment. You have also seen how profiles and output
-formats can be configured and how integrations and flows can be queried directly
-from the terminal.
+### Choosing an output format
 
-This gives us the foundation for the next step in the series. In the next post,
+| Format | Best for                                                      |
+| ------ | ------------------------------------------------------------- |
+| table  | Interactive terminal use and quick inspection                 |
+| json   | Automation, scripting, filtering, and programmatic processing |
+
+This common output pattern applies across CLI resources, so once you understand
+it for one command, you can apply the same approach to other Celigo CLI
+commands.
+
+Now have a configured CLI environment and can query integrations and flows
+directly from the terminal.
+
+In the next post,
+[Creating Your First Integration with the Celigo CLI](/posts/creating-your-first-integration-with-celigo-cli/),
 we'll move beyond inspecting existing resources and create our first integration
 using the Celigo CLI.
