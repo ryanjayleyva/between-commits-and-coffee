@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets'
 import SkipLink from '@/components/ui/SkipLink.astro'
+import { buildStructuredData, safeJsonLd } from '@/lib/seo'
 import { getAnalyticsToken, SITE } from '@/lib/site'
 import '@/styles/index.css'
 
@@ -23,6 +24,13 @@ const modifiedIso =
   published && updated && updated.valueOf() !== published.valueOf()
     ? updated.toISOString()
     : undefined
+const structuredData = buildStructuredData({
+  title,
+  description: pageDescription,
+  url: pageUrl,
+  published,
+  updated,
+})
 ---
 
 <!doctype html>
@@ -36,6 +44,11 @@ const modifiedIso =
     <meta name="author" content={SITE.author} />
     <meta name="theme-color" content="#1c1917" />
     <link rel="canonical" href={pageUrl} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={safeJsonLd(structuredData)}
+    />
     <meta property="og:type" content={ogType} />
     {
       publishedIso && (
