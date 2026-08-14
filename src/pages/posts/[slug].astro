@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content'
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import { formatDate, getPosts, type Post } from '@/lib/content'
 
@@ -30,6 +31,7 @@ const showUpdated =
   published={post.data.published}
   updated={post.data.updated}
 >
+  <Breadcrumbs title={post.data.title} />
   <article class="post">
     <h1 class="post__title">{post.data.title}</h1>
     <p class="post__description">{post.data.description}</p>
