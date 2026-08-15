@@ -82,8 +82,17 @@ const structuredData = buildStructuredData({
         </>
       )
     }
-    <Font cssVariable="--font-geist" />
-    <Font cssVariable="--font-geist-mono" />
+    <Font
+      cssVariable="--font-geist"
+      preload={[
+        { weight: 400, style: 'normal' },
+        { weight: 600, style: 'normal' },
+      ]}
+    />
+    <Font
+      cssVariable="--font-geist-mono"
+      preload={[{ weight: 400, style: 'normal' }]}
+    />
   </head>
 
   <body>

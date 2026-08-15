@@ -17,12 +17,14 @@ export default defineConfig({
       name: 'Geist',
       cssVariable: '--font-geist',
       weights: [400, 600],
+      display: 'optional',
     },
     {
       provider: fontProviders.fontsource(),
       name: 'Geist Mono',
       cssVariable: '--font-geist-mono',
       fallbacks: ['ui-monospace', 'monospace'],
+      display: 'optional',
     },
   ],
   markdown: {
