@@ -1,6 +1,5 @@
 ---
-title:
-  'Celigo CLI: Getting Started with the integrator.io Command Line Interface'
+title: 'How to Get Started with Celigo CLI'
 description:
   'Learn how to install and configure the Celigo CLI, authenticate with an
   integrator.io account, manage profiles, and use basic Celigo CLI commands to
@@ -341,6 +340,6 @@ Now have a configured CLI environment and can query integrations and flows
 directly from the terminal.
 
 In the next post,
-[Creating Your First Integration with the Celigo CLI](/posts/creating-your-first-integration-with-celigo-cli/),
+[How to Create Your First Integration with Celigo CLI](/posts/celigo-cli/how-to-create-your-first-integration-with-celigo-cli/),
 we'll move beyond inspecting existing resources and create our first integration
 using the Celigo CLI.

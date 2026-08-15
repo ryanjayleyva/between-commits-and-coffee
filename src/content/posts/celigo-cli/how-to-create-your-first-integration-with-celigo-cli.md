@@ -1,7 +1,5 @@
 ---
-title:
-  'Celigo CLI: Creating Your First Integration with the integrator.io Command
-  Line Interface'
+title: 'How to Create Your First Integration with Celigo CLI'
 description:
   'Learn how to create your first integrator.io integration using the Celigo
   CLI, configure integration resources, and manage your integration from the
@@ -11,7 +9,7 @@ updated: August 14, 2026
 ---
 
 This tutorial builds on the concepts covered in
-[Getting Started with the Celigo CLI](/posts/getting-started-with-celigo-cli/).
+[How to Get Started with Celigo CLI](/posts/celigo-cli/how-to-get-started-with-celigo-cli/).
 If you haven't already installed, configured, and authenticated the Celigo CLI,
 complete that guide before proceeding.
 
@@ -104,5 +102,6 @@ celigo integrations list --format table
 ```
 
 This provides the foundation for the next step in the series. In the next post,
-Creating Your First Connection with the Celigo CLI, we'll create and configure a
-connection that can be used by flows within integrator.io.
+[How to Set Up a Salesforce Connection with Celigo CLI](/posts/celigo-cli/how-to-set-up-a-salesforce-connection-with-celigo-cli/),
+we'll create and configure a connection that can be used by flows within
+integrator.io.
