@@ -1,0 +1,60 @@
+---
+import { SITE } from '@/lib/site'
+
+const year = new Date().getFullYear()
+const copyright = `© ${year} ${SITE.author}`
+const tagline = `Crafted in Neovim · Compiled over coffee · ${copyright}`
+---
+
+<footer class="footer">
+  <p class="footer__copyright">
+    <span class="footer__marquee">
+      <span class="footer__track">
+        <span class="footer__group">{tagline}</span>
+        <span class="footer__group" aria-hidden="true">{tagline}</span>
+      </span>
+    </span>
+  </p>
+</footer>
+
+<style>
+  .footer {
+    max-width: 40rem;
+    margin: 4rem auto 0;
+    padding: 0 1rem 2rem;
+  }
+
+  .footer__copyright {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 1rem;
+  }
+
+  .footer__marquee {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .footer__track {
+    display: inline-flex;
+    animation: footer-scroll 12s linear infinite;
+    will-change: transform;
+  }
+
+  .footer:hover .footer__track,
+  .footer:focus-within .footer__track {
+    animation-play-state: paused;
+  }
+
+  .footer__group {
+    padding-right: 3rem;
+  }
+
+  @keyframes footer-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

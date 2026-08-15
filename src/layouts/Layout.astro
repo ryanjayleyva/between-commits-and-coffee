@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets'
 import SkipLink from '@/components/ui/SkipLink.astro'
+import Footer from '@/Footer.astro'
 import { buildStructuredData, safeJsonLd } from '@/lib/seo'
 import { getAnalyticsToken, SITE } from '@/lib/site'
 import '@/styles/index.css'
@@ -100,6 +101,7 @@ const structuredData = buildStructuredData({
     <main id="main-content" class="page">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
 
@@ -108,7 +110,14 @@ const structuredData = buildStructuredData({
 </script>
 
 <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   .page {
+    flex: 1;
     max-width: 40rem;
     margin: 0 auto;
     padding: 0 1rem;
