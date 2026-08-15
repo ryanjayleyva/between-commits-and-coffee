@@ -1,12 +1,14 @@
 ---
 interface Props {
   title: string
+  parent?: string
   homeHref?: string
   homeLabel?: string
 }
 
 const {
   title,
+  parent,
   homeHref = '/',
   homeLabel = 'Between Commits and Coffee',
 } = Astro.props
@@ -21,7 +23,7 @@ const {
       <span class="breadcrumbs__separator">›</span>
     </li>
     <li class="breadcrumbs__item">
-      <span class="breadcrumbs__static">posts</span>
+      <span class="breadcrumbs__static">{parent ?? 'posts'}</span>
     </li>
     <li class="breadcrumbs__item" aria-hidden="true">
       <span class="breadcrumbs__separator">›</span>

@@ -31,7 +31,7 @@ const showUpdated =
   published={post.data.published}
   updated={post.data.updated}
 >
-  <Breadcrumbs title={post.data.title} />
+  <Breadcrumbs title={post.data.title} parent={post.id.split('/')[0]} />
   <article class="post">
     <h1 class="post__title">{post.data.title}</h1>
     <p class="post__description">{post.data.description}</p>
