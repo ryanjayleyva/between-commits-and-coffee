@@ -1,0 +1,71 @@
+---
+
+---
+
+<div class="detached__head" data-head>
+  <span class="detached__head-stick"></span>
+  <span class="detached__head-label">HEAD</span>
+</div>
+
+<style>
+  .detached__head {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+    align-self: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-right: clamp(-2rem, -4vw, -4rem);
+    z-index: 2;
+    opacity: 0;
+    animation:
+      detached-head-enter 1s var(--detached-easing) 1.6s forwards,
+      detached-head-float 6s ease-in-out 2.6s infinite;
+  }
+
+  .detached__head-stick {
+    display: block;
+    width: clamp(2rem, 5vw, 4rem);
+    height: 2px;
+    background-color: var(--color-text-muted);
+    transform-origin: left;
+  }
+
+  .detached__head-label {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    padding: 0.35rem 0.6rem;
+    border: 1px solid
+      color-mix(in srgb, var(--color-text-muted) 40%, transparent);
+    border-radius: 2px;
+    background-color: var(--color-bg);
+  }
+
+  @media (max-width: 768px) {
+    .detached__head {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: center;
+      align-self: center;
+      margin-right: clamp(-5rem, -20vw, -8rem);
+      margin-top: clamp(-2rem, -8vh, -4rem);
+    }
+
+    .detached__head-stick {
+      width: clamp(1.5rem, 6vw, 3rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .detached__head {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
