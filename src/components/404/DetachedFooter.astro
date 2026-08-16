@@ -1,0 +1,51 @@
+---
+interface Props {
+  commitSuffix: string
+}
+
+const { commitSuffix } = Astro.props
+---
+
+<footer class="detached__footer">
+  <span class="detached__meta">fatal: unable to resolve reference</span>
+  <span class="detached__meta">error: pathspec did not match any path</span>
+  <span class="detached__meta">HEAD is now at 404{commitSuffix}</span>
+</footer>
+
+<style>
+  .detached__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    margin-top: auto;
+    padding-top: clamp(2rem, 5vh, 4rem);
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    opacity: 0;
+    animation: detached-fade-in 0.8s var(--detached-easing) 2.1s forwards;
+  }
+
+  .detached__meta {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .detached__footer {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .detached__footer {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
