@@ -11,5 +11,4 @@ Disallow: /.wrangler/
 Disallow: /dist/
 Disallow: /node_modules/
 
-# Enable once @astrojs/sitemap is added:
-# Sitemap: https://bcc.rjleyva-045.workers.dev/sitemap-index.xml
+Sitemap: https://rjleyva.com/sitemap-index.xml

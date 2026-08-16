@@ -23,6 +23,7 @@
     "cf:dev": "pnpm run build && wrangler dev"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.0",
     "modern-normalize": "^3.0.1"
   },

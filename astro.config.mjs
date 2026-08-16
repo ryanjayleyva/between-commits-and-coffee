@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, envField, fontProviders } from 'astro/config'
+import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
   env: {
@@ -11,6 +12,7 @@ export default defineConfig({
       }),
     },
   },
+
   fonts: [
     {
       provider: fontProviders.fontsource(),
@@ -27,14 +29,19 @@ export default defineConfig({
       display: 'optional',
     },
   ],
+
   markdown: {
     shikiConfig: {
       theme: 'gruvbox-dark-medium',
     },
   },
+
   site: 'https://rjleyva.com',
+
   server: {
     port: 3000,
     host: true,
   },
+
+  integrations: [sitemap()],
 })
