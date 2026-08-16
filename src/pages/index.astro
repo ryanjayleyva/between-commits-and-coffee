@@ -1,16 +1,16 @@
 ---
 import Hero from '@/components/ui/Hero.astro'
-import Layout from '@/layouts/Layout.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
 import { getPosts, toPostLinks } from '@/lib/content'
 
 const posts = await getPosts()
 const postLinks = toPostLinks(posts)
 ---
 
-<Layout title="Between Commits and Coffee">
+<BaseLayout title="Between Commits and Coffee">
   <Hero
     heading="Between Commits and Coffee"
     subHeading="Notes on code, tools, workflows, and the rabbit holes in between."
     postLinks={postLinks}
   />
-</Layout>
+</BaseLayout>

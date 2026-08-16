@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content'
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro'
-import Layout from '@/layouts/Layout.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate, getPosts, type Post } from '@/lib/content'
 
 export async function getStaticPaths() {
@@ -25,7 +25,7 @@ const showUpdated =
   updatedDate.valueOf() !== post.data.published.valueOf()
 ---
 
-<Layout
+<BaseLayout
   title={post.data.title}
   description={post.data.description}
   published={post.data.published}
@@ -48,7 +48,7 @@ const showUpdated =
     </p>
     <Content />
   </article>
-</Layout>
+</BaseLayout>
 
 <style>
   .post__meta {
