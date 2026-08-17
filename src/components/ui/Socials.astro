@@ -1,5 +1,6 @@
 ---
 import { SOCIAL_LINKS, type SocialLink } from '@/lib/site'
+import RssLink from './RssLink.astro'
 
 interface Props {
   links?: SocialLink[]
@@ -24,6 +25,9 @@ const { links = SOCIAL_LINKS } = Astro.props
       </li>
     ))
   }
+  <li class="socials__item">
+    <RssLink />
+  </li>
 </ul>
 
 <style>

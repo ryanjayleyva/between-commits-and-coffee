@@ -45,6 +45,12 @@ const structuredData = buildStructuredData({
     <meta name="author" content={SITE.author} />
     <meta name="theme-color" content="#1c1917" />
     <link rel="canonical" href={pageUrl} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE.title}
+      href={new URL('rss.xml', Astro.site ?? SITE.url)}
+    />
     <script
       is:inline
       type="application/ld+json"
