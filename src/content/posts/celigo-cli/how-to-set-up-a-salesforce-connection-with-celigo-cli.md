@@ -5,7 +5,7 @@ description:
   creating the connection, completing OAuth authorization, and verifying it from
   the command line.'
 published: August 15, 2026
-updated: August 15, 2026
+updated: August 18, 2026
 ---
 
 This tutorial builds on
@@ -144,6 +144,7 @@ At this point you should have a structure like this:
 └── {} integrations.json
 ```
 
-In the next post, How to Set Up a Google Sheets Connection with Celigo CLI,
+In the next post,
+[How to Set Up a Google Sheets Connection with Celigo CLI](/posts/celigo-cli/how-to-set-up-a-google-sheets-connection-with-celigo-cli/),
 we’ll configure the destination connection for the series flow, enabling it to
 write data to Google Sheets.
