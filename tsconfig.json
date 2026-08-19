@@ -5,6 +5,11 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", ".astro/types.d.ts", "prettier.config.ts", "astro.config.mjs"],
+  "include": [
+    "src",
+    ".astro/types.d.ts",
+    "prettier.config.ts",
+    "astro.config.mjs"
+  ],
   "exclude": ["dist"]
 }
