@@ -28,6 +28,10 @@ export function getPostPath(post: Post): string {
   return `/posts/${getPostSlug(post)}/`
 }
 
+export function getPostOgImagePath(post: Post): string {
+  return `/og/${getPostSlug(post)}.png`
+}
+
 export function toPostLink(post: Post): PostLink {
   return {
     title: post.data.title,
