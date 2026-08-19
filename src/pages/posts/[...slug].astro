@@ -2,7 +2,12 @@
 import { render } from 'astro:content'
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { formatDate, getPosts, type Post } from '@/lib/content'
+import {
+  formatDate,
+  getPostOgImagePath,
+  getPosts,
+  type Post,
+} from '@/lib/content'
 
 export async function getStaticPaths() {
   const posts = await getPosts()
@@ -30,6 +35,8 @@ const showUpdated =
   description={post.data.description}
   published={post.data.published}
   updated={post.data.updated}
+  ogImage={new URL(getPostOgImagePath(post), Astro.site)}
+  ogImageAlt={post.data.title}
 >
   <Breadcrumbs title={post.data.title} parent={post.id.split('/')[0]} />
   <article class="post">
