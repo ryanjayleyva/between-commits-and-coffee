@@ -8,7 +8,7 @@ const posts = await getPosts()
 const postLinks = toPostLinks(posts)
 ---
 
-<BaseLayout title={SITE.siteName}>
+<BaseLayout title={SITE.siteName} ogImageAlt={SITE.siteName}>
   <Hero
     heading={SITE.siteName}
     subHeading="Notes on code, tools, workflows, and the rabbit holes in between."
