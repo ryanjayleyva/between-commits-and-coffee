@@ -16,9 +16,9 @@ export default defineConfig(
   // Use non-type-aware TS recommended rules
   ...tseslint.configs.recommended,
 
-  // Type-check regular TS/JS files (astro-eslint-parser handles .astro separately)
+  // Type-check TS/JS in src, .astro handled separately
   {
-    files: ['**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs}'],
+    files: ['src/**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs}', 'prettier.config.ts'],
     extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
@@ -31,30 +31,12 @@ export default defineConfig(
   // Use Astro recommended rules (parser, processor, globals)
   ...eslintPluginAstro.configs['flat/recommended'],
 
-  // Apply TS recommended rules to .astro frontmatter without overriding the parser
-  {
-    files: ['**/*.astro'],
-    rules: {
-      ...tseslint.configs.recommended.rules,
-    },
-  },
-
   // Use @typescript-eslint/no-unused-vars
   {
     rules: {
       'no-unused-vars': 'off',
-    },
-  },
-
-  // Config files use loosely-typed plugin APIs
-  {
-    files: ['eslint.config.*'],
-    rules: {
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-return': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-import-type-side-effects': 'error',
     },
   },
 
