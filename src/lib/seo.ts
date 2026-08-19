@@ -6,6 +6,7 @@ interface SeoData {
   url: URL
   published?: Date
   updated?: Date
+  image?: URL
 }
 
 export function safeJsonLd(data: object): string {
@@ -22,6 +23,7 @@ export function buildStructuredData({
   url,
   published,
   updated,
+  image,
 }: SeoData) {
   const personId = `${SITE.url}/#person`
   return {
@@ -42,6 +44,7 @@ export function buildStructuredData({
               headline: title,
               description,
               url,
+              ...(image ? { image: image.toString() } : {}),
               datePublished: published.toISOString(),
               ...(updated && updated > published
                 ? { dateModified: updated.toISOString() }
