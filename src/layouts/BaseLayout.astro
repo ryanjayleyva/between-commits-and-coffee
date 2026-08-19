@@ -17,7 +17,7 @@ const { title, description, published, updated } = Astro.props
 
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title
 const pageDescription = description ?? SITE.description
-const pageUrl = new URL(Astro.url.pathname, Astro.site ?? SITE.url)
+const pageUrl = new URL(Astro.url.pathname, Astro.site)
 const analyticsToken = import.meta.env.PROD ? getAnalyticsToken() : undefined
 const ogType = published ? 'article' : 'website'
 const publishedIso = published?.toISOString()
@@ -48,8 +48,8 @@ const structuredData = buildStructuredData({
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={SITE.title}
-      href={new URL('rss.xml', Astro.site ?? SITE.url)}
+      title={SITE.siteName}
+      href={new URL('rss.xml', Astro.site)}
     />
     <script
       is:inline
@@ -67,7 +67,7 @@ const structuredData = buildStructuredData({
         <meta property="article:modified_time" content={modifiedIso} />
       )
     }
-    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:site_name" content={SITE.siteName} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <!-- TODO: add og:image, switch twitter:card to summary_large_image once a 1200x630 asset exists -->

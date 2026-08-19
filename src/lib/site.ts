@@ -3,6 +3,7 @@ import { PUBLIC_CF_ANALYTICS_TOKEN } from 'astro:env/client'
 
 export const SITE = {
   title: 'RJ Leyva',
+  siteName: 'Between Commits and Coffee',
   author: 'RJ Leyva',
   description:
     'Practical notes on full-stack development, Neovim, integrations, and automation, written between commits.',

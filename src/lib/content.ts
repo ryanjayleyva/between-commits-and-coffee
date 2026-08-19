@@ -20,10 +20,18 @@ export function sortPostsByDate(posts: Post[]): Post[] {
   )
 }
 
+export function getPostSlug(post: Post): string {
+  return post.id
+}
+
+export function getPostPath(post: Post): string {
+  return `/posts/${getPostSlug(post)}/`
+}
+
 export function toPostLink(post: Post): PostLink {
   return {
     title: post.data.title,
-    href: `/posts/${post.id}/`,
+    href: getPostPath(post),
     date: post.data.published,
   }
 }

@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@/lib/site'
+
 interface Props {
   title: string
   parent?: string
@@ -6,12 +8,7 @@ interface Props {
   homeLabel?: string
 }
 
-const {
-  title,
-  parent,
-  homeHref = '/',
-  homeLabel = 'Between Commits and Coffee',
-} = Astro.props
+const { title, parent, homeHref = '/', homeLabel = SITE.siteName } = Astro.props
 ---
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
