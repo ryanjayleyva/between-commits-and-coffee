@@ -5,7 +5,7 @@ description:
   Celigo CLI, configure the OAuth 2.0 flow, request headers, and a health check,
   and authorize and verify the connection from the command line.'
 published: August 16, 2026
-updated: August 18, 2026
+updated: August 21, 2026
 ---
 
 This tutorial is part of a series on working with the Celigo CLI and assumes
@@ -226,5 +226,7 @@ Now you should have a structure like this.
 └── {} integrations.json
 ```
 
-Both connections are now created and authorized. In the next post, we’ll use
-them to build our flows.
+Both connections are now created and authorized. In the next post,
+[How to Create a Flow with Celigo CLI](/posts/celigo-cli/how-to-create-a-flow-with-celigo-cli/),
+we’ll create the flow that ties them together, attaching it to the integration
+and leaving it disabled until it has a source and a destination.
