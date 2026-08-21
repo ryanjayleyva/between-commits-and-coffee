@@ -10,6 +10,7 @@ export async function GET(context: APIContext) {
     title: SITE.siteName,
     description: SITE.description,
     site: context.site!.toString(),
+    customData: `<image><url>${new URL('favicon.png', context.site).toString()}</url><title>${SITE.siteName}</title><link>${context.site!.toString()}</link></image>`,
     items: posts.map(post => {
       const updated = post.data.updated
 
