@@ -39,6 +39,11 @@
     margin: 1rem 0;
     padding: 2rem 1rem 1rem;
     border-radius: 8px;
+    /* Shiki sets `overflow-x: auto` inline on the <pre>, which makes the
+       absolutely-positioned copy button part of the scrolled content.
+       Neutralize it here and let the inner <code> own the scrolling so the
+       button stays pinned to the top-right of the block. */
+    overflow-x: clip !important;
   }
 
   pre.astro-code::before {
@@ -55,6 +60,8 @@
   }
 
   pre.astro-code code {
+    display: block;
+    overflow-x: auto;
     font-size: 14px;
     line-height: 1.5;
   }
