@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
 import SkipLink from '@/components/ui/SkipLink.astro'
 import Footer from '@/Footer.astro'
 import { buildStructuredData, safeJsonLd } from '@/lib/seo'
@@ -46,6 +47,7 @@ const structuredData = buildStructuredData({
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={SITE.author} />
