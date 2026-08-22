@@ -32,7 +32,7 @@ export default defineConfig({
 
   markdown: {
     shikiConfig: {
-      theme: 'gruvbox-dark-medium',
+      theme: 'github-dark',
     },
   },
 
