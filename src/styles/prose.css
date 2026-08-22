@@ -83,8 +83,8 @@
 
   .copy-button:hover,
   .copy-button:focus-visible {
-    border-color: var(--color-text);
-    color: var(--color-text);
+    border-color: var(--color-link-hover);
+    color: var(--color-info);
   }
 
   .copy-button--copied,
