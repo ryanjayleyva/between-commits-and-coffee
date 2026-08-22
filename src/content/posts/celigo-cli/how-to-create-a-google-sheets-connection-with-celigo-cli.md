@@ -26,7 +26,7 @@ This connection serves as the destination for the flow we'll build later. It
 uses HTTP to connect to the Google Sheets API and write Salesforce account data
 to dedicated spreadsheet tabs.
 
-## Create the Google Sheets Connection
+## Creating the Google Sheets Connection
 
 Create the connection definition:
 

@@ -91,6 +91,8 @@ logging                       {
 }
 ```
 
+## Verifying the Flow
+
 You can verify the new flow alongside the others at any time.
 
 ```bash

@@ -26,7 +26,7 @@ connection in JSON, create it with `celigo connections create`, authorize it
 with `celigo connections authorize`, and verify it with
 `celigo connections ping`.
 
-## Create the Salesforce Connection
+## Creating the Salesforce Connection
 
 From `salesforce-google-sheets-integration`, create a `connections` directory
 for connection definitions:

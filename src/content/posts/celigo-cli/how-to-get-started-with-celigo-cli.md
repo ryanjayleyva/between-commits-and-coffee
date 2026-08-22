@@ -77,7 +77,7 @@ node --version
 npm --version
 ```
 
-## Install the Celigo CLI
+## Installing the Celigo CLI
 
 Once Node.js and npm are available, install the Celigo CLI globally using npm:
 
@@ -100,7 +100,7 @@ If the installation was successful, the command returns the installed version:
 2026.8.6
 ```
 
-## Inspect the Celigo CLI Skills
+## Inspecting the Celigo CLI Skills
 
 The Celigo CLI also installs Celigo-specific skills for supported AI coding
 agents. The skills provide context about integrator.io concepts and development
@@ -145,7 +145,7 @@ writing-sql -> ../../../.agents/skills/writing-sql/
 The `->` notation indicates that these entries are symbolic links rather than
 regular directories.
 
-## Configure the CLI
+## Configuring the CLI
 
 After installation, the Celigo CLI creates a `~/.celigo` directory. Its
 `config.json` file contains the CLI configuration, including connection details,
@@ -197,7 +197,7 @@ individual commands:
 celigo integrations list --format table
 ```
 
-### Multiple Profiles
+### Configuring Multiple Profiles
 
 If you work across multiple Celigo environments, use separate profiles to
 isolate their connection and authentication settings:
@@ -236,7 +236,7 @@ Subsequent commands use the selected profile until you switch to another one.
 For available CLI configuration options and supported environments, see the
 [Celigo CLI Configuration reference](https://developer.celigo.com/cli/getting-started/configuration).
 
-## Verify the CLI
+## Verifying the CLI
 
 With the CLI configured and authenticated, use these commands to inspect your
 integrations and flows:
