@@ -5,7 +5,7 @@ description:
   integrator.io account, manage profiles, and use basic Celigo CLI commands to
   list integrations and flows.'
 published: August 12, 2026
-updated: August 22, 2026
+updated: August 24, 2026
 ---
 
 The Celigo CLI provides a programmatic interface to the integrations and flows
@@ -104,8 +104,9 @@ If the installation was successful, the command returns the installed version:
 
 The Celigo CLI also installs Celigo-specific skills for supported AI coding
 agents. The skills provide context about integrator.io concepts and development
-workflows. During installation, the CLI creates symbolic links to them in the
-agent's skills directory. The location of that directory depends on the agent.
+workflows. The CLI creates symbolic links to them in the agent's skills
+directory. The location of that directory depends on the agent, and the CLI
+normally populates it automatically the first time you run any command.
 
 For example, with pi.dev:
 
@@ -144,6 +145,15 @@ writing-sql -> ../../../.agents/skills/writing-sql/
 
 The `->` notation indicates that these entries are symbolic links rather than
 regular directories.
+
+If the directory is empty or the links are missing, run the installer yourself:
+
+```bash
+celigo skills install -g --all -y
+```
+
+If you need a skill that isn't covered, you can request it by opening a pull
+request against the [celigo/ai repository](https://github.com/celigo/ai).
 
 ## Configuring the CLI
 
