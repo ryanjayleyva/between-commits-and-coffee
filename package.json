@@ -20,7 +20,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "deploy": "pnpm run build && wrangler deploy",
-    "cf:dev": "pnpm run build && wrangler dev"
+    "cf:dev": "pnpm run build && wrangler dev",
+    "security": "osv-scanner scan source --lockfile=pnpm-lock.yaml && pnpm audit",
+    "security:secrets": "gitleaks git --redact"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
