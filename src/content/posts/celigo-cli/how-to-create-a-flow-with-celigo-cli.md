@@ -46,6 +46,7 @@ The `_integrationId` field attaches the flow to an existing integration. The
 
 ```json
 {
+  "_id": "<YOUR_FLOW_ID>",
   "_integrationId": "<YOUR_INTEGRATION_ID>",
   "name": "Salesforce Accounts to Google Sheets",
   "description": "For https://rjleyva.com Celigo CLI demonstration only."
@@ -113,5 +114,7 @@ destination. It is not runnable yet.
 └── integrations.json
 ```
 
-In the next post, we'll add the Salesforce export as the source and configure
-its SOQL query to extract account data.
+In the next post,
+[How to Create a Salesforce Export with Celigo CLI](/posts/celigo-cli/how-to-create-a-salesforce-export-with-celigo-cli/)
+we'll add the Salesforce export as the source and configure its SOQL query to
+extract account data.
