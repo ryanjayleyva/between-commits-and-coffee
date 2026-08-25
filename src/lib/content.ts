@@ -60,7 +60,3 @@ export function formatShortDate(date: Date): string {
     day: '2-digit',
   }).format(date)
 }
-
-export function formatIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10)
-}
