@@ -291,6 +291,6 @@ At this point, your integration structure should look like this.
 ```
 
 The flow now has a source. In the next post,
-[How to Create a Google Sheets Import with Celigo CLI](/posts/celigo-cli/how-to-create-a-google-sheets-imports-with-celigo-cli)
+[How to Create a Google Sheets Import with Celigo CLI](/posts/celigo-cli/how-to-create-a-google-sheets-import-with-celigo-cli)
 we'll create the Google Sheets import as its destination and map the account
 fields into spreadsheet rows.
