@@ -1,6 +1,6 @@
 @layer prose {
   :not(pre) > code {
-    color: var(--color-info-muted);
+    color: var(--color-link);
   }
 
   table {
@@ -54,7 +54,7 @@
     font-family: var(--font-geist-mono), ui-monospace, monospace;
     font-size: 0.75rem;
     line-height: 1;
-    color: var(--color-info-muted);
+    color: var(--color-link);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
