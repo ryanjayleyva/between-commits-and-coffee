@@ -42,7 +42,7 @@
       transparent
     );
     transform-origin: top;
-    animation: detached-line-grow 1.2s var(--detached-easing) 0.3s backwards;
+    animation: detached-line-grow 1.2s cubic-bezier(0.76, 0, 0.24, 1) 0.3s backwards;
   }
 
   .detached__node {
@@ -53,7 +53,7 @@
     border-radius: 50%;
     background-color: var(--color-text-muted);
     transform: translateX(-50%) scale(0);
-    animation: detached-node-pop 0.5s var(--detached-easing) backwards;
+    animation: detached-node-pop 0.5s cubic-bezier(0.76, 0, 0.24, 1) backwards;
   }
 
   .detached__node--root {
@@ -80,7 +80,7 @@
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
     opacity: 0;
-    animation: detached-fade-in 0.6s var(--detached-easing) backwards;
+    animation: detached-fade-in 0.6s cubic-bezier(0.76, 0, 0.24, 1) backwards;
   }
 
   .detached__branch--main {
