@@ -8,9 +8,8 @@ published: August 23, 2026
 updated: August 24, 2026
 ---
 
-With the flow in place, the next step is to give it a source: a Salesforce
-export that queries account data with SOQL. If you haven't created the flow yet,
-start with
+With the flow in place, the next step is to create a Salesforce export that
+queries account data with SOQL. If you haven't created the flow yet, start with
 [How to Create a Flow with Celigo CLI](/posts/celigo-cli/how-to-create-a-flow-with-celigo-cli/).
 
 ## TL;DR
@@ -291,5 +290,7 @@ At this point, your integration structure should look like this.
 └── integrations.json
 ```
 
-The flow now has a source. In the next post, we'll create the Google Sheets
-import as its destination and map the account fields into spreadsheet rows.
+The flow now has a source. In the next post,
+[How to Create a Google Sheets Import with Celigo CLI](/posts/celigo-cli/how-to-create-a-google-sheets-imports-with-celigo-cli)
+we'll create the Google Sheets import as its destination and map the account
+fields into spreadsheet rows.
