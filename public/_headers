@@ -6,3 +6,9 @@
 
 /og/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/security.txt
+  Content-Type: text/plain
+
+/.well-known/security.txt
+  Content-Type: text/plain

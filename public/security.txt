@@ -1,0 +1,5 @@
+# Root fallback per RFC 9116.
+# Canonical location: /.well-known/security.txt
+
+Contact: mailto:rjleyva@tuta.io
+Expires: 2027-08-27T00:00:00Z
