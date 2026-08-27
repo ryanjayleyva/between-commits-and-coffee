@@ -8,6 +8,9 @@ export const SITE = {
   description:
     'Practical notes on full-stack development, Neovim, integrations, and automation, written between commits.',
   url: site,
+  // Bucket Codeberg heatmap timestamps into calendar days.
+  // Match the timezone you use when viewing Codeberg for day-level parity.
+  timeZone: 'Asia/Manila',
 } as const
 
 export interface SocialLink {
