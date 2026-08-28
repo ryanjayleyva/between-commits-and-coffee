@@ -1,6 +1,6 @@
 ---
-import Hero from '@/components/ui/Hero.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/components/Hero/Hero.astro'
+import Base from '@/layouts/base/Base.astro'
 import { getPosts, toPostLinks } from '@/lib/content'
 import { SITE } from '@/lib/site'
 
@@ -8,7 +8,7 @@ const posts = await getPosts()
 const postLinks = toPostLinks(posts)
 ---
 
-<BaseLayout title={SITE.siteName} ogImageAlt={SITE.siteName}>
+<Base title={SITE.siteName} ogImageAlt={SITE.siteName}>
   <Hero
     heading={SITE.siteName}
     subHeading="Notes on code, tools, workflows, and the rabbit holes in between."
@@ -16,4 +16,4 @@ const postLinks = toPostLinks(posts)
     codebergUsername="rjl"
     timeZone={SITE.timeZone}
   />
-</BaseLayout>
+</Base>

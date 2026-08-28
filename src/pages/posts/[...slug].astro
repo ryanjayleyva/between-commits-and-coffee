@@ -1,12 +1,12 @@
 ---
 import { render } from 'astro:content'
-import Breadcrumbs from '@/components/ui/Breadcrumbs.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs.astro'
+import Post from '@/components/Post/Post.astro'
+import Base from '@/layouts/base/Base.astro'
 import {
-  formatDate,
   getPostOgImagePath,
   getPosts,
-  type Post,
+  type Post as PostData,
 } from '@/lib/content'
 
 export async function getStaticPaths() {
@@ -18,19 +18,14 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  post: Post
+  post: PostData
 }
 
 const { post } = Astro.props
 const { Content } = await render(post)
-
-const updatedDate = post.data.updated ?? post.data.published
-const showUpdated =
-  post.data.updated !== undefined &&
-  updatedDate.valueOf() !== post.data.published.valueOf()
 ---
 
-<BaseLayout
+<Base
   title={post.data.title}
   description={post.data.description}
   published={post.data.published}
@@ -39,34 +34,11 @@ const showUpdated =
   ogImageAlt={post.data.title}
 >
   <Breadcrumbs title={post.data.title} parent={post.id.split('/')[0]} />
-  <article class="post">
-    <h1 class="post__title">{post.data.title}</h1>
-    <p class="post__description">{post.data.description}</p>
-    <p class="post__meta">
-      Published {formatDate(post.data.published)}
-      {
-        showUpdated && (
-          <>
-            <br />
-            Updated {formatDate(updatedDate)}
-          </>
-        )
-      }
-    </p>
-    <Content />
-  </article>
-</BaseLayout>
-
-<style>
-  .post__meta {
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    margin-block-start: 1rem;
-    margin-block-end: 0;
-  }
-
-  .post__description {
-    margin-block-end: 0;
-    color: var(--color-text-muted);
-  }
-</style>
+  <Post
+    title={post.data.title}
+    description={post.data.description}
+    published={post.data.published}
+    updated={post.data.updated}
+  />
+  <Content />
+</Base>

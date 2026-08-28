@@ -1,0 +1,43 @@
+.detached__header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  letter-spacing: -0.01em;
+  animation: detached-fade-in 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.1s backwards;
+}
+
+.detached__site {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.detached__separator {
+  color: var(--color-text-muted);
+}
+
+.detached__state {
+  color: var(--color-danger-muted);
+  letter-spacing: 0.06em;
+}
+
+.detached__state::before {
+  content: '';
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-danger-muted);
+  animation: detached-pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detached__state::before {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

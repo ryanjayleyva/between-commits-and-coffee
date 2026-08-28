@@ -1,0 +1,38 @@
+.site-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(0.7rem, 1vw, 0.8rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-danger-muted);
+}
+
+.site-status__dot {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--color-danger-muted);
+  animation: site-status-pulse 2s ease-in-out infinite;
+}
+
+@keyframes site-status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-status__dot {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,19 @@
+---
+import { SITE } from '@/lib/site'
+import './footer.css'
+
+const year = new Date().getFullYear()
+const copyright = `© ${year} ${SITE.author}`
+const tagline = `Crafted in Neovim · Compiled over coffee · ${copyright}`
+---
+
+<footer class="footer">
+  <p class="footer__copyright">
+    <span class="footer__marquee">
+      <span class="footer__track">
+        <span class="footer__group">{tagline}</span>
+        <span class="footer__group" aria-hidden="true">{tagline}</span>
+      </span>
+    </span>
+  </p>
+</footer>

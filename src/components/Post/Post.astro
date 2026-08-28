@@ -1,0 +1,32 @@
+---
+import { formatDate } from '@/lib/content'
+import './post.css'
+
+interface Props {
+  title: string
+  description?: string
+  published: Date
+  updated?: Date
+}
+
+const { title, description, published, updated } = Astro.props
+
+const showUpdated =
+  updated !== undefined && updated.valueOf() !== published.valueOf()
+---
+
+<article class="post">
+  <h1 class="post__title">{title}</h1>
+  {description && <p class="post__description">{description}</p>}
+  <p class="post__meta">
+    Published {formatDate(published)}
+    {
+      showUpdated && (
+        <>
+          <br />
+          Updated {formatDate(updated)}
+        </>
+      )
+    }
+  </p>
+</article>

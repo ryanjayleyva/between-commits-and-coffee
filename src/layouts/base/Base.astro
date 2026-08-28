@@ -1,25 +1,43 @@
 ---
 import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
+import Footer from '@/components/Footer/Footer.astro'
+import SkipLink from '@/components/SkipLink/SkipLink.astro'
 import { buildStructuredData, safeJsonLd } from '@/lib/seo'
 import { getAnalyticsToken, SITE } from '@/lib/site'
 import '@/styles/index.css'
+import './base.css'
 
 interface Props {
   title?: string
   description?: string
+  published?: Date
+  updated?: Date
+  ogImage?: URL
+  ogImageAlt?: string
 }
 
-const { title, description } = Astro.props
+const { title, description, published, updated, ogImage, ogImageAlt } =
+  Astro.props
+
+const pageOgImage = ogImage ?? new URL('og.png', Astro.site)
 
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title
 const pageDescription = description ?? SITE.description
 const pageUrl = new URL(Astro.url.pathname, Astro.site)
-const pageOgImage = new URL('og.png', Astro.site)
 const analyticsToken = import.meta.env.PROD ? getAnalyticsToken() : undefined
+const ogType = published ? 'article' : 'website'
+const publishedIso = published?.toISOString()
+const modifiedIso =
+  published && updated && updated.valueOf() !== published.valueOf()
+    ? updated.toISOString()
+    : undefined
 const structuredData = buildStructuredData({
   title,
   description: pageDescription,
   url: pageUrl,
+  published,
+  updated,
   image: pageOgImage,
 })
 ---
@@ -30,18 +48,35 @@ const structuredData = buildStructuredData({
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={SITE.author} />
     <meta name="theme-color" content="#1c1917" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={pageUrl} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE.siteName}
+      href={new URL('rss.xml', Astro.site)}
+    />
     <script
       is:inline
       type="application/ld+json"
       set:html={safeJsonLd(structuredData)}
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {
+      publishedIso && (
+        <meta property="article:published_time" content={publishedIso} />
+      )
+    }
+    {
+      modifiedIso && (
+        <meta property="article:modified_time" content={modifiedIso} />
+      )
+    }
     <meta property="og:site_name" content={SITE.siteName} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
@@ -49,18 +84,25 @@ const structuredData = buildStructuredData({
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
+    {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+    <meta property="og:url" content={pageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={pageOgImage} />
+    {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
     {
       analyticsToken && (
-        <script
-          is:inline
-          type="module"
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={`{"token": "${analyticsToken}"}`}
-        />
+        <>
+          {/* Cloudflare Web Analytics */}
+          <script
+            is:inline
+            type="module"
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${analyticsToken}"}`}
+          />
+          {/* End Cloudflare Web Analytics */}
+        </>
       )
     }
     <Font
@@ -76,7 +118,15 @@ const structuredData = buildStructuredData({
     />
   </head>
 
-  <body>
-    <slot />
+  <body class="page-shell">
+    <SkipLink />
+    <main id="main-content" class="page-shell__main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
+
+<script>
+  import '@/scripts/copy'
+</script>
