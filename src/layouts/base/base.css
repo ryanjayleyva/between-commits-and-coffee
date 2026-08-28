@@ -1,0 +1,12 @@
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-shell__main {
+  flex: 1;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

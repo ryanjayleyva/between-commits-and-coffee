@@ -1,0 +1,21 @@
+.hero {
+  padding-block-start: 2rem;
+}
+
+.hero__heading {
+  margin: 0.5rem auto;
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  color: var(--color-warning-muted);
+}
+
+.hero__subheading {
+  color: var(--color-link);
+  margin-top: 0;
+}
+
+.hero .socials {
+  margin-top: 2rem;
+}

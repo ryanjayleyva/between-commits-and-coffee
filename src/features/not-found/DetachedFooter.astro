@@ -1,0 +1,15 @@
+---
+import './detached-footer.css'
+
+interface Props {
+  commitSuffix: string
+}
+
+const { commitSuffix } = Astro.props
+---
+
+<footer class="detached__footer">
+  <span class="detached__meta">fatal: unable to resolve reference</span>
+  <span class="detached__meta">error: pathspec did not match any path</span>
+  <span class="detached__meta">HEAD is now at 404{commitSuffix}</span>
+</footer>

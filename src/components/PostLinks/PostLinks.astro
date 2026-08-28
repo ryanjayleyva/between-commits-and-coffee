@@ -1,0 +1,32 @@
+---
+import type { PostLink } from '@/lib/content'
+import { formatShortDate } from '@/lib/content'
+import './post-links.css'
+
+interface Props {
+  links?: PostLink[]
+}
+
+const { links = [] } = Astro.props
+---
+
+{
+  links.length > 0 && (
+    <div class="post-links">
+      <p class="post-links__label">
+        <span class="post-links__dash" aria-hidden="true" />
+        {new Date().getFullYear()}
+      </p>
+      <ul class="post-links__list" role="list">
+        {links.map(({ title, href, date }) => (
+          <li class="post-links__item">
+            <span class="post-links__index">{formatShortDate(date)}</span>
+            <a class="post-links__link" href={href}>
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

@@ -1,0 +1,7 @@
+.rss-link:hover,
+.rss-link:focus-visible {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  outline: 0;
+}

@@ -1,0 +1,30 @@
+---
+import { SITE } from '@/lib/site'
+import './detached-content.css'
+
+interface Props {
+  commitSuffix: string
+}
+
+const { commitSuffix } = Astro.props
+---
+
+<div class="detached__content">
+  <h1 class="detached__title">
+    <span class="detached__sha">
+      <span class="detached__sha-prefix">404</span>
+      <span class="detached__sha-rest" data-sha aria-hidden="true"
+        >{commitSuffix}</span
+      >
+    </span>
+    <span class="detached__subtitle">object not found</span>
+  </h1>
+
+  <p class="detached__message">
+    The page you requested is not reachable from any branch in this repository.
+  </p>
+
+  <a href="/" class="detached__command" data-command>
+    <span class="detached__command-text">Back to {SITE.url}</span>
+  </a>
+</div>
