@@ -8,6 +8,7 @@
   body {
     margin: 0;
     line-height: 1.7;
+    overflow-x: clip;
   }
 
   html {
@@ -50,6 +51,7 @@
   li,
   figcaption {
     text-wrap: pretty;
+    overflow-wrap: anywhere;
   }
 
   :focus-visible {
@@ -58,7 +60,10 @@
   }
 
   img,
-  video {
+  video,
+  iframe,
+  embed,
+  object {
     max-width: 100%;
     height: auto;
     display: block;
