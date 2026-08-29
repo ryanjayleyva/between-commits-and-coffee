@@ -451,5 +451,6 @@ The flow now has a Salesforce export as its source and a Google Sheets import as
 its destination. The integration is complete and ready for scheduled or manual
 runs.
 
-In the next post, we'll add a cron schedule to run the flow on a recurring
-basis.
+In the next post,
+[How to Schedule a Flow with Celigo CLI](/posts/celigo-cli/how-to-schedule-a-flow-with-celigo-cli)
+we'll add a cron schedule to run the flow on a recurring basis.
