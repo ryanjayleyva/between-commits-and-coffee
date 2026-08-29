@@ -1,9 +1,11 @@
 export function setupContributionGraphTooltips(): void {
-  let tooltip = document.getElementById('contribution-graph-tooltip')
+  let tooltip = document.querySelector<HTMLElement>(
+    '.contribution-graph__tooltip'
+  )
 
   if (!tooltip) {
     tooltip = document.createElement('div')
-    tooltip.id = 'contribution-graph-tooltip'
+    tooltip.className = 'contribution-graph__tooltip'
     tooltip.setAttribute('role', 'tooltip')
     tooltip.hidden = true
     document.body.append(tooltip)

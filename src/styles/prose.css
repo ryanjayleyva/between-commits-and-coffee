@@ -1,12 +1,16 @@
 @layer prose {
   :not(pre) > code {
     color: var(--color-link);
+    overflow-wrap: anywhere;
   }
 
   table {
+    display: block;
     border-collapse: collapse;
     margin: 1rem 0;
     width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   th,
@@ -24,6 +28,7 @@
 
   td {
     color: var(--color-text);
+    overflow-wrap: anywhere;
   }
 
   blockquote {
