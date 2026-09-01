@@ -209,6 +209,8 @@ Salesforce accounts and appends them to the sheet without any manual
 intervention. You can still trigger the flow on demand with `celigo flows run`.
 The schedule is an additional trigger, not a replacement for manual runs.
 
-In the next post, we’ll put the Celigo definition files under
+In the next post,
+[How to Track a Celigo CLI Integration with Git](/posts/celigo-cli/how-to-track-a-celigo-cli-integration-with-git)
+we’ll put the Celigo definition files under
 [Git](https://git-scm.com/) so integration changes can be tracked, reviewed, and
 reproduced.
