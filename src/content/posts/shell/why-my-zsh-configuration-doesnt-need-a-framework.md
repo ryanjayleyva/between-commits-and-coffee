@@ -5,7 +5,7 @@ description:
   wiring together a few standalone tools instead of using a Zsh framework or
   plugin manager.'
 published: September 4, 2026
-updated: September 5, 2026
+updated: September 7, 2026
 ---
 
 My `~/.zshrc` is small, and that is the point. I let standalone tools handle
@@ -377,4 +377,4 @@ milliseconds. If that changes, those are the first places I'd investigate.
 ## What Comes Next
 
 This covered the shell. Next up is tmux, including the shared scripts I keep in
-~/env. After that, I'll get into the Neovim setup that EDITOR points at.
+`~/env`. After that, I'll get into the Neovim setup that EDITOR points at.
