@@ -321,22 +321,14 @@ becomes a `PATH` entry and I delete the alias.
 
 The load order is:
 
-```
-interactive zsh
-    ↓
-source env.zsh        ← PATH prepend, plugin source paths, PNPM_HOME
-    ↓
-instant prompt        ← cached prompt renders before widget init
-    ↓
-env defaults + dedupe ← EDITOR, BAT_THEME, typeset -U path
-    ↓
-completion            ← compinit + cached dump
-    ↓
-tool init             ← zoxide (needs compdef), plugins, p10k config
-    ↓
-PATH extension        ← PNPM_HOME/bin (needs PNPM_HOME set in env.zsh)
-    ↓
-aliases               ← wrap eza, tmux script, cargo
+```zsh
+1. env.zsh
+2. instant prompt
+3. shell defaults
+4. completion
+5. tool initialization
+6. PATH additions
+7. aliases
 ```
 
 Only a few of these are real dependencies. `env.zsh` first, because it defines
