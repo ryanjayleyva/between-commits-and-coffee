@@ -1,14 +1,14 @@
 ---
-title: "Why My Zsh Configuration Doesn't Need a Framework"
+title: 'My Minimal Zsh Configuration, Designed for Predictability'
 description:
-  'A walkthrough of my small, framework-free Zsh configuration, and why I prefer
-  wiring together a few standalone tools instead of using a Zsh framework or
-  plugin manager.'
+  'A walkthrough of my minimal, framework-free Zsh configuration on macOS,
+  focusing on explicit dependencies, startup cost, portability, and the
+  tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
-updated: September 7, 2026
+updated: September 8, 2026
 ---
 
-My `~/.zshrc` is small, and that is the point. I let standalone tools handle
+My `~/.zshrc` is minimal, and that is the point. I let standalone tools handle
 most of the functionality: `zoxide` for navigation, `eza` for listing, and
 Powerlevel10k for the prompt. Homebrew handles the packages, while the shell
 configuration mostly wires everything together.
