@@ -13,28 +13,33 @@
 }
 
 .footer__marquee {
-  display: block;
+  display: flex;
   overflow: hidden;
-  white-space: nowrap;
-}
-
-.footer__track {
-  display: inline-flex;
-  animation: footer-scroll 12s linear infinite;
-  will-change: transform;
-}
-
-.footer:hover .footer__track,
-.footer:focus-within .footer__track {
-  animation-play-state: paused;
 }
 
 .footer__group {
+  flex: none;
   padding-right: 3rem;
+  animation: footer-scroll 12s linear infinite;
+}
+
+.footer:hover .footer__group,
+.footer:focus-within .footer__group {
+  animation-play-state: paused;
 }
 
 @keyframes footer-scroll {
+  from {
+    transform: translateX(0);
+  }
+
   to {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__group {
+    animation: none;
   }
 }
