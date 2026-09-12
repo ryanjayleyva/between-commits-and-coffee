@@ -1,11 +1,11 @@
 ---
-title: 'My Minimal Zsh Configuration, Designed for Predictability'
+title: 'A Zsh Configuration I Can Hold in My Head'
 description:
   'A walkthrough of my minimal, framework-free Zsh configuration on macOS,
   focusing on explicit dependencies, startup cost, portability, and the
   tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
-updated: September 10, 2026
+updated: September 12, 2026
 ---
 
 I keep `~/.zshrc` small because a short file is readable as a whole. Navigation
