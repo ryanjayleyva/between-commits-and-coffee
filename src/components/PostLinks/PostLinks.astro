@@ -13,10 +13,7 @@ const { links = [] } = Astro.props
 {
   links.length > 0 && (
     <div class="post-links">
-      <p class="post-links__label">
-        <span class="post-links__dash" aria-hidden="true" />
-        {new Date().getFullYear()}
-      </p>
+      <p class="post-links__label">{new Date().getFullYear()}</p>
       <ul class="post-links__list" role="list">
         {links.map(({ title, href, date }) => (
           <li class="post-links__item">
