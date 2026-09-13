@@ -1,7 +1,5 @@
 ---
-import { Font } from 'astro:assets'
-import { buildStructuredData, safeJsonLd } from '@/lib/seo'
-import { getAnalyticsToken, SITE } from '@/lib/site'
+import DocumentHead from '@/components/DocumentHead/DocumentHead.astro'
 import '@/styles/index.css'
 import './404.css'
 
@@ -11,70 +9,12 @@ interface Props {
 }
 
 const { title, description } = Astro.props
-
-const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title
-const pageDescription = description ?? SITE.description
-const pageUrl = new URL(Astro.url.pathname, Astro.site)
-const pageOgImage = new URL('og.png', Astro.site)
-const analyticsToken = import.meta.env.PROD ? getAnalyticsToken() : undefined
-const structuredData = buildStructuredData({
-  title,
-  description: pageDescription,
-  url: pageUrl,
-  image: pageOgImage,
-})
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <meta name="author" content={SITE.author} />
-    <meta name="theme-color" content="#1c1917" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="robots" content="noindex" />
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={safeJsonLd(structuredData)}
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.siteName} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={pageOgImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={pageOgImage} />
-    {
-      analyticsToken && (
-        <script
-          is:inline
-          type="module"
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={`{"token": "${analyticsToken}"}`}
-        />
-      )
-    }
-    <Font
-      cssVariable="--font-geist"
-      preload={[
-        { weight: 400, style: 'normal' },
-        { weight: 600, style: 'normal' },
-      ]}
-    />
-    <Font
-      cssVariable="--font-geist-mono"
-      preload={[{ weight: 400, style: 'normal' }]}
-    />
+    <DocumentHead title={title} description={description} indexable={false} />
   </head>
 
   <body>
