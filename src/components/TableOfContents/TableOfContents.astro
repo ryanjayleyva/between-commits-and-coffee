@@ -1,0 +1,35 @@
+---
+import type { MarkdownHeading } from 'astro'
+import './table-of-contents.css'
+
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+
+const items = headings.filter(
+  heading => heading.depth >= 2 && heading.depth <= 3
+)
+---
+
+{
+  items.length > 0 && (
+    <nav class="toc" aria-label="Table of contents" data-toc>
+      <h2 class="toc__title">On this page</h2>
+      <ol class="toc__list" role="list">
+        {items.map(heading => (
+          <li class={`toc__item toc__item--level-${heading.depth}`}>
+            <a class="toc__link" href={`#${heading.slug}`}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<script>
+  import '@/scripts/toc'
+</script>
