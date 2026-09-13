@@ -1,8 +1,6 @@
 ---
 import { render } from 'astro:content'
-import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs.astro'
-import Post from '@/components/Post/Post.astro'
-import Base from '@/layouts/base/Base.astro'
+import PostLayout from '@/layouts/post/PostLayout.astro'
 import {
   getPostOgImagePath,
   getPosts,
@@ -22,23 +20,18 @@ interface Props {
 }
 
 const { post } = Astro.props
-const { Content } = await render(post)
+const { Content, headings } = await render(post)
 ---
 
-<Base
+<PostLayout
   title={post.data.title}
   description={post.data.description}
+  parent={post.id.split('/')[0]}
   published={post.data.published}
   updated={post.data.updated}
   ogImage={new URL(getPostOgImagePath(post), Astro.site)}
   ogImageAlt={post.data.title}
+  headings={headings}
 >
-  <Breadcrumbs title={post.data.title} parent={post.id.split('/')[0]} />
-  <Post
-    title={post.data.title}
-    description={post.data.description}
-    published={post.data.published}
-    updated={post.data.updated}
-  />
   <Content />
-</Base>
+</PostLayout>

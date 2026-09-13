@@ -1,0 +1,53 @@
+---
+import type { MarkdownHeading } from 'astro'
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs.astro'
+import Post from '@/components/Post/Post.astro'
+import TableOfContents from '@/components/TableOfContents/TableOfContents.astro'
+import Base from '@/layouts/base/Base.astro'
+import './post-layout.css'
+
+interface Props {
+  title: string
+  description?: string
+  parent?: string
+  published: Date
+  updated?: Date
+  ogImage?: URL
+  ogImageAlt?: string
+  headings: MarkdownHeading[]
+}
+
+const {
+  title,
+  description,
+  parent,
+  published,
+  updated,
+  ogImage,
+  ogImageAlt,
+  headings,
+} = Astro.props
+---
+
+<Base
+  title={title}
+  description={description}
+  published={published}
+  updated={updated}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+>
+  <Breadcrumbs title={title} parent={parent} />
+  <div class="post-layout">
+    <Post
+      title={title}
+      description={description}
+      published={published}
+      updated={updated}
+    />
+    <div class="post-layout__content">
+      <slot />
+    </div>
+    <TableOfContents headings={headings} />
+  </div>
+</Base>
