@@ -3,7 +3,7 @@
 }
 
 .post-layout :is(h2, h3) {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 3.75rem;
 }
 
 @media (min-width: 68rem) {
