@@ -1,6 +1,5 @@
 ---
 import PostLinks from '@/components/PostLinks/PostLinks.astro'
-import SiteStatus from '@/components/SiteStatus/SiteStatus.astro'
 import Socials from '@/components/Socials/Socials.astro'
 import CodebergContributions from '@/features/contribution-graph/CodebergContributions.astro'
 import type { PostLink } from '@/lib/content'
@@ -10,17 +9,15 @@ interface Props {
   heading: string
   subHeading: string
   postLinks?: PostLink[]
-  status?: string
   codebergUsername: string
   timeZone: string
 }
 
-const { heading, subHeading, postLinks, status, codebergUsername, timeZone } =
+const { heading, subHeading, postLinks, codebergUsername, timeZone } =
   Astro.props
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
-  <SiteStatus status={status} />
   <h1 class="hero__heading" id="hero-heading">
     {heading}
   </h1>
