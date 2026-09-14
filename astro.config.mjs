@@ -41,6 +41,12 @@ export default defineConfig({
 
   site: 'https://rjleyva.com',
 
+  vite: {
+    build: {
+      cssMinify: 'esbuild',
+    },
+  },
+
   server: {
     port: 3000,
     host: true,
