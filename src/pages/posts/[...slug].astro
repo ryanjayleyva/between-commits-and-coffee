@@ -26,7 +26,6 @@ const { Content, headings } = await render(post)
 <PostLayout
   title={post.data.title}
   description={post.data.description}
-  parent={post.id.split('/')[0]}
   published={post.data.published}
   updated={post.data.updated}
   ogImage={new URL(getPostOgImagePath(post), Astro.site)}

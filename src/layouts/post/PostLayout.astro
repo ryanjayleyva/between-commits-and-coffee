@@ -1,6 +1,5 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs.astro'
 import Post from '@/components/Post/Post.astro'
 import TableOfContents from '@/components/TableOfContents/TableOfContents.astro'
 import Base from '@/layouts/base/Base.astro'
@@ -9,7 +8,6 @@ import './post-layout.css'
 interface Props {
   title: string
   description?: string
-  parent?: string
   published: Date
   updated?: Date
   ogImage?: URL
@@ -20,7 +18,6 @@ interface Props {
 const {
   title,
   description,
-  parent,
   published,
   updated,
   ogImage,
@@ -37,7 +34,6 @@ const {
   ogImage={ogImage}
   ogImageAlt={ogImageAlt}
 >
-  <Breadcrumbs title={title} parent={parent} />
   <div class="post-layout">
     <Post
       title={title}
