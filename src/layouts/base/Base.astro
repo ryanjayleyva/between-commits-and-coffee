@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions'
 import DocumentHead from '@/components/DocumentHead/DocumentHead.astro'
 import Footer from '@/components/Footer/Footer.astro'
+import Header from '@/components/Header/Header.astro'
 import SkipLink from '@/components/SkipLink/SkipLink.astro'
 import '@/styles/index.css'
 import './base.css'
@@ -35,6 +36,7 @@ const { title, description, published, updated, ogImage, ogImageAlt } =
 
   <body class="page-shell">
     <SkipLink />
+    <Header />
     <main id="main-content" class="page-shell__main">
       <slot />
     </main>
