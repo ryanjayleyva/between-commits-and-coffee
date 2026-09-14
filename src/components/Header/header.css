@@ -22,7 +22,7 @@
 .header::before {
   content: '';
   position: absolute;
-  inset: 0 0 -2.7rem;
+  inset: 0 0 -1rem;
   z-index: -1;
   pointer-events: none;
   backdrop-filter: blur(8px);
@@ -30,7 +30,7 @@
   mask-image: linear-gradient(
     to bottom,
     var(--color-bg) 0,
-    var(--color-bg) calc(100% - 2.7rem),
+    var(--color-bg) calc(100% - 1rem),
     transparent
   );
 }
@@ -40,6 +40,5 @@
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     mask-image: none;
-    -webkit-mask-image: none;
   }
 }
