@@ -436,6 +436,6 @@ That's really the point of the configuration. The five files aren't necessary,
 but each concern has a predictable home, and that makes the whole thing easier
 for me to change without having to think about where something lives.
 
-## Related Articles
+## Related Posts
 
 - [A Zsh Configuration I Can Hold in My Head](/posts/shell/a-zsh-configuration-i-can-hold-in-my-head/)

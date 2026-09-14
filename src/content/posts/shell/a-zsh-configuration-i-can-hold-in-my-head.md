@@ -354,6 +354,6 @@ breaks, I don't have to wonder which framework, plugin, or generated layer is
 responsible. I can start at `env.zsh`, walk through `~/.zshrc`, and usually find
 the problem quickly. That's enough for me.
 
-## Related Articles
+## Related Posts
 
 - [A Tmux Configuration Organized by Reason for Change](/posts/shell/a-tmux-configuration-organized-by-reason-for-change)
