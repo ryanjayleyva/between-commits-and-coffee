@@ -4,7 +4,7 @@
   z-index: 10;
 }
 
-/* Bar height (~3.5rem) is the anchor for post-layout scroll-margin and .toc offsets */
+/* Bar height (~3.7rem) is the anchor for post-layout scroll-margin and .toc offsets */
 .header__nav {
   display: flex;
   align-items: center;
@@ -25,8 +25,8 @@
   inset: 0 0 -1rem;
   z-index: -1;
   pointer-events: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   mask-image: linear-gradient(
     to bottom,
     var(--color-bg) 0,
