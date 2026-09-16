@@ -1,11 +1,11 @@
 ---
-title: 'A Zsh Configuration I Can Hold in My Head'
+title: 'The Zsh Configuration I Can Reason About'
 description:
   'A walkthrough of my minimal, framework-free Zsh configuration on macOS,
   focusing on explicit dependencies, startup cost, portability, and the
   tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
-updated: September 12, 2026
+updated: September 16, 2026
 ---
 
 I keep `~/.zshrc` small because a short file is readable as a whole. Navigation
@@ -356,4 +356,4 @@ the problem quickly. That's enough for me.
 
 ## Related Posts
 
-- [A Tmux Configuration Organized by Reason for Change](/posts/shell/a-tmux-configuration-organized-by-reason-for-change)
+- [Organizing Tmux Configuration by Reason for Change](/posts/shell/organizing-tmux-configuration-by-reason-for-change)

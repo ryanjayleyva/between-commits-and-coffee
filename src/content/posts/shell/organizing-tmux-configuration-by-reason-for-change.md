@@ -1,12 +1,12 @@
 ---
-title: 'A Tmux Configuration Organized by Reason for Change'
+title: 'Organizing Tmux Configuration by Reason for Change'
 description:
   'A walkthrough of my small, plugin-free tmux configuration on macOS with tmux
   3.7c from Homebrew, split into five files by reason for change, including the
   scripts that turn tmux into a persistent workspace and the tradeoffs behind
   keeping it simple.'
 published: September 7, 2026
-updated: September 13, 2026
+updated: September 16, 2026
 ---
 
 My tmux configuration is five small files, and the split is by reason for
@@ -438,4 +438,4 @@ for me to change without having to think about where something lives.
 
 ## Related Posts
 
-- [A Zsh Configuration I Can Hold in My Head](/posts/shell/a-zsh-configuration-i-can-hold-in-my-head/)
+- [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
