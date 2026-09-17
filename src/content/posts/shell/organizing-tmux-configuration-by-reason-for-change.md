@@ -6,7 +6,7 @@ description:
   scripts that turn tmux into a persistent workspace and the tradeoffs behind
   keeping it simple.'
 published: September 7, 2026
-updated: September 16, 2026
+updated: September 18, 2026
 ---
 
 My tmux configuration is five small files, and the split is by reason for
@@ -439,3 +439,4 @@ for me to change without having to think about where something lives.
 ## Related Posts
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
+- [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)

@@ -5,7 +5,7 @@ description:
   focusing on explicit dependencies, startup cost, portability, and the
   tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
-updated: September 16, 2026
+updated: September 18, 2026
 ---
 
 I keep `~/.zshrc` small because a short file is readable as a whole. Navigation
@@ -357,3 +357,4 @@ the problem quickly. That's enough for me.
 ## Related Posts
 
 - [Organizing Tmux Configuration by Reason for Change](/posts/shell/organizing-tmux-configuration-by-reason-for-change)
+- [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
