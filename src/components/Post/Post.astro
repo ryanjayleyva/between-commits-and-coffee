@@ -7,9 +7,10 @@ interface Props {
   description?: string
   published: Date
   updated?: Date
+  tags?: string[]
 }
 
-const { title, description, published, updated } = Astro.props
+const { title, description, published, updated, tags = [] } = Astro.props
 
 const showUpdated =
   updated !== undefined && updated.valueOf() !== published.valueOf()
@@ -29,4 +30,18 @@ const showUpdated =
       )
     }
   </p>
+  {
+    tags.length > 0 && (
+      <ul class="post__tags" role="list">
+        {tags.map(tag => (
+          <li class="post__tag">
+            <span class="post__tag-hash" aria-hidden="true">
+              #
+            </span>
+            {tag}
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </article>

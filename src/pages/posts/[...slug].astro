@@ -28,6 +28,7 @@ const { Content, headings } = await render(post)
   description={post.data.description}
   published={post.data.published}
   updated={post.data.updated}
+  tags={post.data.tags}
   ogImage={new URL(getPostOgImagePath(post), Astro.site)}
   ogImageAlt={post.data.title}
   headings={headings}
