@@ -6,6 +6,7 @@ description:
   line.'
 published: August 16, 2026
 updated: August 21, 2026
+tags: ['celigo-cli', 'google-sheets', 'oauth']
 ---
 
 With the Salesforce connection in place, the next step is to create the Google

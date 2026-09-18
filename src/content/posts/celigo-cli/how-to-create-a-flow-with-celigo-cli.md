@@ -5,6 +5,7 @@ description:
   integration, and manage it from the command line.'
 published: August 20, 2026
 updated: August 22, 2026
+tags: ['celigo-cli', 'flows']
 ---
 
 With both connections configured, the next step is to create the flow that will

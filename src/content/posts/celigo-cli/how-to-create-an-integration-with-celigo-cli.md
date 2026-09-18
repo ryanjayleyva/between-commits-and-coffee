@@ -5,6 +5,7 @@ description:
   resources, and manage it programmatically from the command line.'
 published: August 13, 2026
 updated: August 22, 2026
+tags: ['celigo-cli', 'integrations']
 ---
 
 This tutorial builds on the CLI setup covered in

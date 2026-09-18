@@ -5,6 +5,7 @@ description:
   complete OAuth authorization, and verify the connection from the command line.'
 published: August 15, 2026
 updated: August 22, 2026
+tags: ['celigo-cli', 'salesforce', 'oauth']
 ---
 
 With the CLI configured and the integration created, the next step is to add the

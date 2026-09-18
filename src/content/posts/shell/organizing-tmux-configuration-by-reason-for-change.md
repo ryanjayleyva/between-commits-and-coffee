@@ -7,6 +7,7 @@ description:
   keeping it simple.'
 published: September 7, 2026
 updated: September 18, 2026
+tags: ['tmux', 'shell', 'macos']
 ---
 
 My tmux configuration is five small files, and the split is by reason for

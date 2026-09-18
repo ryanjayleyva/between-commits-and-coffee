@@ -7,6 +7,7 @@ description:
   errors.'
 published: August 24, 2026
 updated: August 26, 2026
+tags: ['celigo-cli', 'google-sheets', 'handlebars']
 ---
 
 With the Salesforce export in place, the next step is to create the Google

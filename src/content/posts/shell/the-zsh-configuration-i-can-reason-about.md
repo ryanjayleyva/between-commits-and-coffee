@@ -6,6 +6,7 @@ description:
   tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
 updated: September 18, 2026
+tags: ['zsh', 'shell', 'macos']
 ---
 
 I keep `~/.zshrc` small because a short file is readable as a whole. Navigation

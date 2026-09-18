@@ -6,6 +6,7 @@ description:
   existing flow.'
 published: August 23, 2026
 updated: August 24, 2026
+tags: ['celigo-cli', 'salesforce', 'soql']
 ---
 
 With the flow in place, the next step is to create a Salesforce export that

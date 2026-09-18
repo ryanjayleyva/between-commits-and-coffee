@@ -5,6 +5,7 @@ description:
   scrollback, window decorations, and why tmux handles my shortcuts.'
 published: September 11, 2026
 updated: September 17, 2026
+tags: ['wezterm', 'terminal', 'macos']
 ---
 
 My WezTerm configuration is one Lua file, forty-four lines long. It picks a font

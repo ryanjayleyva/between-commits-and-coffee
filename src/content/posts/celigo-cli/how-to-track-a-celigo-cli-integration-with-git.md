@@ -6,6 +6,7 @@ description:
   version control.'
 published: August 30, 2026
 updated: September 1, 2026
+tags: ['celigo-cli', 'git', 'gitleaks']
 ---
 
 The flow now has a Salesforce export as its source, a Google Sheets import as

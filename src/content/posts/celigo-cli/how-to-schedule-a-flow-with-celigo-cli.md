@@ -6,6 +6,7 @@ description:
   it with celigo flows update.'
 published: August 26, 2026
 updated: August 30, 2026
+tags: ['celigo-cli', 'flows', 'cron']
 ---
 
 The flow now has a Salesforce export as its source and a Google Sheets import as

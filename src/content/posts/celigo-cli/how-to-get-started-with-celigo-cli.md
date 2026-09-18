@@ -6,6 +6,7 @@ description:
   list integrations and flows.'
 published: August 12, 2026
 updated: August 24, 2026
+tags: ['celigo-cli', 'cli', 'getting-started']
 ---
 
 The Celigo CLI provides a programmatic interface to the integrations and flows
