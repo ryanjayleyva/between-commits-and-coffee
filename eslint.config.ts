@@ -16,9 +16,9 @@ export default defineConfig(
   // Use non-type-aware TS recommended rules
   ...tseslint.configs.recommended,
 
-  // Type-check TS/JS in src, .astro handled separately
+  // Type-check TS in src, .astro handled separately
   {
-    files: ['src/**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs}', 'prettier.config.ts'],
+    files: ['src/**/*.ts', 'prettier.config.ts', 'eslint.config.ts'],
     extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
