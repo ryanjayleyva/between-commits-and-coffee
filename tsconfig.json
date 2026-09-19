@@ -9,7 +9,8 @@
     "src",
     ".astro/types.d.ts",
     "prettier.config.ts",
-    "astro.config.mjs"
+    "astro.config.ts",
+    "eslint.config.ts"
   ],
   "exclude": ["dist"]
 }
