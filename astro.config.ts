@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig, envField, fontProviders } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 
