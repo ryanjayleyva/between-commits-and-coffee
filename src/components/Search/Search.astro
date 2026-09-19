@@ -1,0 +1,26 @@
+---
+import './search.css'
+---
+
+<form class="search" role="search">
+  <label class="sr-only" for="post-search"> Search posts </label>
+  <input
+    class="search__input"
+    id="post-search"
+    type="search"
+    placeholder="Search posts"
+    autocomplete="off"
+    role="combobox"
+    aria-controls="search-results"
+    aria-expanded="false"
+  />
+  <kbd class="search__shortcut" aria-hidden="true"> cmd + k </kbd>
+  <kbd class="search__shortcut search__shortcut--exit" aria-hidden="true">
+    esc
+  </kbd>
+  <div class="search__results" id="search-results" role="listbox" hidden></div>
+</form>
+
+<script>
+  import '@/scripts/search'
+</script>
