@@ -1,4 +1,5 @@
 ---
+import Search from '@/components/Search/Search.astro'
 import { SITE } from '@/lib/site'
 import './header.css'
 ---
@@ -8,5 +9,6 @@ import './header.css'
     <a class="header__brand" href="/" aria-label={SITE.siteName}>
       <img src="/favicon.png" alt="" width={32} height={32} />
     </a>
+    <Search />
   </nav>
 </header>
