@@ -181,4 +181,5 @@ of them is a line edit. That convenience has been the real payoff.
 ## Related Posts
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
-- [How I Structure My Tmux Configuration by Reason for Change](/posts/shell/how-i-structure-my-tmux-configuration-by-reason-for-change/)
+- [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
+- [How I Structure My Neovim Configuration by Concern](/posts/neovim/how-i-structure-my-neovim-configuration-by-concern/)

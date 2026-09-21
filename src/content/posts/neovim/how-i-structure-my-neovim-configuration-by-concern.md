@@ -415,5 +415,5 @@ own article. Everything in this post runs on Neovim alone.
 ## Related Posts
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
-- [How I Structure My Tmux Configuration by Reason for Change](/posts/shell/how-i-structure-my-tmux-configuration-by-reason-for-change/)
+- [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
 - [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
