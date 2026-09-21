@@ -1,12 +1,12 @@
 ---
-title: 'Organizing Tmux Configuration by Reason for Change'
+title: 'How I Structure My Tmux Configuration by Reason for Change'
 description:
   'A walkthrough of my small, plugin-free tmux configuration on macOS with tmux
   3.7c from Homebrew, split into five files by reason for change, including the
   scripts that turn tmux into a persistent workspace and the tradeoffs behind
   keeping it simple.'
 published: September 7, 2026
-updated: September 18, 2026
+updated: September 21, 2026
 tags: ['tmux', 'shell', 'macos']
 ---
 
