@@ -1,5 +1,5 @@
 ---
-title: 'How I Structure My Tmux Configuration by Reason for Change'
+title: 'Restructuring My Tmux Configuration by Reason for Change'
 description:
   'A walkthrough of my small, plugin-free tmux configuration on macOS with tmux
   3.7c from Homebrew, split into five files by reason for change, including the
@@ -10,10 +10,11 @@ updated: September 21, 2026
 tags: ['tmux', 'shell', 'macos']
 ---
 
-My tmux configuration is five small files, and the split is by reason for
-change. Keys live in `bindings.conf`, looks in `statusline.conf`, behavior in
-`options.conf`. When I want to change how a key behaves I know the file before I
-open an editor. The edit loop is find the file, change a line, press `C-a r`.
+This used to be a single `~/.tmux.conf`. It is now five small files, split by
+reason for change. Keys live in `bindings.conf`, looks in `statusline.conf`,
+behavior in `options.conf`. When I want to change how a key behaves I know the
+file before I open an editor. The edit loop is find the file, change a line,
+press `C-a r`.
 
 This is not a big config. The five files add up to about seventy lines, one
 screen you could read top to bottom. Splitting it is not about escaping an
@@ -441,3 +442,4 @@ for me to change without having to think about where something lives.
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
 - [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
+- [How I Structure My Neovim Configuration by Concern](/posts/neovim/how-i-structure-my-neovim-configuration-by-concern/)
