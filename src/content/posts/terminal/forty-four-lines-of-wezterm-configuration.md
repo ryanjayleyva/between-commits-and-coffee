@@ -4,7 +4,7 @@ description:
   'A walkthrough of my WezTerm configuration in Lua, covering fonts, colors,
   scrollback, window decorations, and why tmux handles my shortcuts.'
 published: September 11, 2026
-updated: September 17, 2026
+updated: September 21, 2026
 tags: ['wezterm', 'terminal', 'macos']
 ---
 
@@ -181,4 +181,4 @@ of them is a line edit. That convenience has been the real payoff.
 ## Related Posts
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
-- [Organizing Tmux Configuration by Reason for Change](/posts/shell/organizing-tmux-configuration-by-reason-for-change/)
+- [How I Structure My Tmux Configuration by Reason for Change](/posts/shell/how-i-structure-my-tmux-configuration-by-reason-for-change/)

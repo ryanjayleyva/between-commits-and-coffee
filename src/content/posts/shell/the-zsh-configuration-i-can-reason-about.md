@@ -5,7 +5,7 @@ description:
   focusing on explicit dependencies, startup cost, portability, and the
   tradeoffs behind keeping shell configuration simple.'
 published: September 4, 2026
-updated: September 18, 2026
+updated: September 21, 2026
 tags: ['zsh', 'shell', 'macos']
 ---
 
@@ -357,5 +357,5 @@ the problem quickly. That's enough for me.
 
 ## Related Posts
 
-- [Organizing Tmux Configuration by Reason for Change](/posts/shell/organizing-tmux-configuration-by-reason-for-change)
+- [How I Structure My Tmux Configuration by Reason for Change](/posts/shell/how-i-structure-my-tmux-configuration-by-reason-for-change)
 - [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
