@@ -1,5 +1,6 @@
 import { defineConfig, envField, fontProviders } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
+import { zenbonesCustom } from './src/lib/zenbones-custom.ts'
 
 export default defineConfig({
   env: {
@@ -31,7 +32,7 @@ export default defineConfig({
 
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
+      theme: zenbonesCustom,
       langAlias: {
         conf: 'ini',
       },
