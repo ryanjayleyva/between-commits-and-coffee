@@ -14,7 +14,7 @@ itself. It is split by reason for change into three concerns, options, keymaps,
 and autocommands, and `init.lua` is the entry point that composes them. One
 ordering dependency ties the base together. The leader must be set before
 keymaps are created. Nothing in the base comes from a plugin. The plugin layer,
-loaded by `vim.pack`, is a separate subject with its own article. This is the
+loaded by `vim.pack`, is a separate subject with its own post. This is the
 configuration I am carrying into 2027, and every layer above it builds on this
 foundation.
 
@@ -51,8 +51,8 @@ require('config.autocmds').setup()
 
 Everything that makes the editor behave is delegated out, which is what keeps
 `init.lua` a loader instead of a config file. The real file continues below
-these three lines with the plugin setup, which is outside this article's scope
-and is not needed to understand any of this.
+these three lines with the plugin setup, which is outside this post's scope and
+is not needed to understand any of this.
 
 Each `require` resolves to a file under `lua/` in the config directory. Neovim
 adds every `lua/` directory on its runtimepath to the Lua module search path,
@@ -410,7 +410,7 @@ layout from scratch. That is the trade, and it is the whole story of the
 structure.
 
 Plugins are a separate subject, and the configuration that loads them has its
-own article. Everything in this post runs on Neovim alone.
+own post. Everything in this post runs on Neovim alone.
 
 ## Related Posts
 
