@@ -1,0 +1,10 @@
+[extend]
+useDefault = true
+
+[allowlist]
+
+# This retired analytics project ID was previously loaded from .env.
+# It is intentionally public and is not a credential, but gitleaks
+# flags it as a generic API key. Suppress only this exact historical
+# value.
+regexes = ['''0ee08bcadc624293aedd76e737ddd60b''']
