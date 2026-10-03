@@ -6,7 +6,7 @@ export const SITE = {
   siteName: 'Between Commits and Coffee',
   author: 'RJ Leyva',
   description:
-    'Practical notes on full-stack development, Neovim, integrations, and automation, written between commits.',
+    'Things I’ve learned building software, and things I’m still figuring out.',
   url: site,
   // Bucket Codeberg heatmap timestamps into calendar days.
   // Match the timezone you use when viewing Codeberg for day-level parity.

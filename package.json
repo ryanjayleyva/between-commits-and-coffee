@@ -1,6 +1,6 @@
 {
   "name": "between-commits-and-coffee",
-  "description": "Practical notes on full-stack development, Neovim, integrations, and automation, written between commits.",
+  "description": "Things I’ve learned building software, and things I’m still figuring out.",
   "author": "RJ Leyva <rjleyva@tuta.io>",
   "version": "1.0.0",
   "type": "module",
