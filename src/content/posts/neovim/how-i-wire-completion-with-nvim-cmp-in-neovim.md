@@ -5,6 +5,7 @@ description:
   four sources, the Tab chain that decides between them, and the snippet engine
   this file borrows from another module.'
 published: October 1, 2026
+updated: October 4, 2026
 tags: ['neovim', 'lua', 'dotfiles']
 ---
 
@@ -344,11 +345,11 @@ is there.
 ## Sources, and the One With a Condition
 
 Four sources, declared once, with no filetype table anywhere. `nvim_lsp` is the
-bridge to the sixteen servers the previous post enabled, plus the svelte one
-added since, and it is the source that reads the capabilities `core.lsp`
-selects. `luasnip` is the bridge to the snippet files. `path` is filesystem
-paths. `buffer` is words already in the current buffer. `cmp.config.sources`
-builds that list; it does not extend anything.
+bridge to the sixteen servers the previous post enabled, and it is the source
+that reads the capabilities `core.lsp` selects. `luasnip` is the bridge to the
+snippet files. `path` is filesystem paths. `buffer` is words already in the
+current buffer. `cmp.config.sources` builds that list; it does not extend
+anything.
 
 The buffer source carries the only conditional in the file that governs a
 source. The others are the branch conditions in the two mapping chains, which
