@@ -339,10 +339,13 @@ warning. `severity_sort`, so the worst problem in a float is the first thing
 read. `update_in_insert = false`, so diagnostics do not flicker while typing,
 which is obvious in a screenshot and maddening in a day of actual use.
 
-The sign column is the most deliberate omission in the file. Four nerd-font
-glyphs sit commented out at lines seventy-one through seventy-four, and the
-active configuration is four highlight groups, `ErrorMsg` through `HintMsg`.
-That trades a shape readable without color for a color that is not.
+The sign column is not the omission in this file that it looks like. Four
+nerd-font glyphs sit commented out, which leaves the `text` table inside `signs`
+empty, but an empty table does not clear the column: Neovim falls back to a
+single-letter sign for each severity, the first letter of its name, so an error
+is marked `E` and a warning `W` in place of the glyphs. The four highlight
+groups, `ErrorMsg` through `HintMsg`, sit in `numhl` and color the line number.
+The trade is a nerd-font glyph for a letter, set against a colored number.
 
 ## Where the Formatting Decision Lives
 
