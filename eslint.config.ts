@@ -20,6 +20,7 @@ export default defineConfig(
   {
     files: [
       'src/**/*.ts',
+      'tests/**/*.ts',
       'prettier.config.ts',
       'eslint.config.ts',
       'vitest.config.ts',
