@@ -2,7 +2,6 @@
 // Codeberg buckets heatmap entries with the browser's local calendar day
 // (new Date(ts * 1000).toDateString()). We pin one timezone so build
 // output is deterministic and matches that viewer's Codeberg graph.
-const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as const
 
 export function toISODateInTimeZone(date: Date, timeZone: string): string {
   const parts = zonedParts(date, timeZone)
@@ -102,5 +101,4 @@ function pad(value: number): string {
 export function assertValidTimeZone(timeZone: string): void {
   // Throws RangeError for invalid IANA zones.
   Intl.DateTimeFormat(undefined, { timeZone })
-  void WEEKDAYS
 }
