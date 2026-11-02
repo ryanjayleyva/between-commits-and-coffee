@@ -10,7 +10,8 @@
     ".astro/types.d.ts",
     "prettier.config.ts",
     "astro.config.ts",
-    "eslint.config.ts"
+    "eslint.config.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["dist"]
 }

@@ -18,7 +18,12 @@ export default defineConfig(
 
   // Type-check TS in src, .astro handled separately
   {
-    files: ['src/**/*.ts', 'prettier.config.ts', 'eslint.config.ts'],
+    files: [
+      'src/**/*.ts',
+      'prettier.config.ts',
+      'eslint.config.ts',
+      'vitest.config.ts',
+    ],
     extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
