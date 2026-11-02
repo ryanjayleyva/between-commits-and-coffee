@@ -19,6 +19,8 @@
     "format:check": "prettier --check \"src/**/*.{astro,css,ts}\" \"*.{ts,json,jsonc,md}\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "deploy": "pnpm run build && wrangler deploy",
     "cf:dev": "pnpm run build && wrangler dev",
     "cf:serve": "wrangler dev",
@@ -48,6 +50,7 @@
     "sharp": "^0.35.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.66.0",
+    "vitest": "^5.0.5",
     "wrangler": "^4.143.0"
   }
 }
