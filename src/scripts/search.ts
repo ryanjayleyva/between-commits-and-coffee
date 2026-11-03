@@ -1,16 +1,12 @@
+import { escapeHtml, matchesEntry, resultMarkup } from '@/lib/search'
+import type { SearchEntry } from '@/lib/search'
+
 const SEARCH_FORM = '.search'
 const SEARCH_INPUT = '.search__input'
 const SEARCH_RESULTS = '.search__results'
 const SEARCH_RESULT = '.search__result'
 
 const MAX_RESULTS = 8
-
-interface SearchEntry {
-  title: string
-  tags: string[]
-  href: string
-  date: string
-}
 
 let cachedIndex: SearchEntry[] | null = null
 let indexRequest: Promise<SearchEntry[]> | null = null
@@ -32,32 +28,6 @@ function fetchIndex(): Promise<SearchEntry[]> {
       throw error
     })
   return indexRequest
-}
-
-function matchesEntry(entry: SearchEntry, query: string): boolean {
-  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
-  if (terms.length === 0) return false
-  const haystack = `${entry.title} ${entry.tags.join(' ')}`.toLowerCase()
-  return terms.every(term => haystack.includes(term))
-}
-
-function escapeHtml(text: string): string {
-  return text
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-}
-
-function resultMarkup(entry: SearchEntry, index: number): string {
-  const meta =
-    entry.tags.length > 0
-      ? `${entry.date} · ${entry.tags.join(', ')}`
-      : entry.date
-  return `<a class="search__result" href="${escapeHtml(entry.href)}" role="option" id="search-result-${index}" aria-selected="false">
-    <span class="search__result-title">${escapeHtml(entry.title)}</span>
-    <span class="search__result-meta">${escapeHtml(meta)}</span>
-  </a>`
 }
 
 function initSearch(): void {
