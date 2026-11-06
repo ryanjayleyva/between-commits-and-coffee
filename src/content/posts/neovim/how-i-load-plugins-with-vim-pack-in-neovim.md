@@ -18,24 +18,24 @@ a plugin manager, because Neovim ships one.
 that records every revision sits next to `init.lua`, and the first `vim.pack.add`
 call reads it once on every startup. I keep it under version control.
 
-I am on Neovim 0.12.6. `vim.pack` is new in 0.12 and is still documented as
-experimental, so the API may change. It also needs `git` on `PATH`.
+This configuration runs on Neovim 0.12.6. `vim.pack` is new in 0.12 and is
+still documented as experimental, so the API may change. It also needs `git` on
+`PATH`.
 
 ## TL;DR
 
-`vim.pack.add` takes a list of specs. A spec has four fields. Two specs here
-used to carry a field that is not one of the four, and `vim.pack` ignored both
-without a word. One of those two cost me a working fzf extension I did not know
-was missing. I removed both and replaced the second with a `PackChanged` hook.
+`vim.pack.add` takes a list of specs, and a spec has four fields. Two specs here
+used to carry a field outside those four, and `vim.pack` ignored both without a
+warning. The second one cost me a working fzf extension I did not know was
+missing. Both fields are gone, and the second is now a `PackChanged` hook.
 
-The other thing worth knowing is when `plugin/` directories load. It is not
+The other detail worth knowing is when `plugin/` directories load. It is not
 during `init.lua`.
 
 ## The Spec Has Four Fields
 
 `:h vim.pack.Spec` lists `src`, `name`, `version`, and `data`. Anything else in
-the table is not read. It is not rejected and there is no warning. It is
-ignored.
+the table is not read, not rejected, and not warned about.
 
 `lua/plugins/kulala.lua` used to carry a fifth.
 
@@ -55,14 +55,14 @@ require('kulala').setup({
 `ft` reads like lazy loading, because it is the field lazy.nvim uses for it.
 Here it did nothing. `add` put the directory on the runtimepath and returned,
 and the `setup()` on the next line ran during startup like every other
-module's. I checked by starting the config headless and asking whether the
-module was already in `package.loaded`. It was.
+module's. Starting the configuration headless and asking whether the module was
+already in `package.loaded` showed that it was.
 
-I removed the `ft` line. The plugin was loading eagerly anyway, because the
+The `ft` line is gone. The plugin was loading eagerly anyway, because the
 module requires it directly. A field that changes nothing is worse than no
-field: it suggests a mechanism that is not there.
+field, because it suggests a mechanism that is not there.
 
-The second one had a consequence.
+The second field had a visible effect, though not an obvious one.
 
 ## The Extension That Was Never Built
 
@@ -89,16 +89,15 @@ pcall(telescope.load_extension, 'fzf')
 Called without the `pcall`, it failed with `'fzf' extension doesn't exist or
 isn't installed`, and underneath that, `dlopen` failing on `build/libfzf.so`.
 Telescope still opened and still worked, sorted by its Lua sorter instead of
-the native one. That is the entire failure: a different code path and no
-message.
+the native one, with no message to say the extension had not loaded.
 
-I did not find this by noticing that search felt slow. I found it by checking
-whether the directory existed.
+The failure did not show up as slowness. It turned up in a check of whether the
+directory existed.
 
-`vim.pack` has no declarative build field, but it does have `PackChanged`. That
-is the supported place to run a build. I removed `build` from the spec and
-added a hook in `lua/config/pack.lua`, registered before the first
-`vim.pack.add()`:
+`vim.pack` has no declarative build field, but it does have `PackChanged`,
+which is the supported place to run a build. The spec no longer carries
+`build`. A hook in `lua/config/pack.lua`, registered before the first
+`vim.pack.add()`, runs the build instead.
 
 ```lua
 vim.api.nvim_create_autocmd('PackChanged', {
@@ -113,16 +112,16 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 ```
 
-`:wait()` is the part that matters. `vim.pack.add` waits for installs to
-finish, but `vim.system` without `:wait()` would return before `make` did, so
-the extension load a few lines later would still find no `.so`. The hook is
-registered before the first `add` because `lock_sync` can install the lockfile
-entries that are missing from disk on that first call.
+The `:wait()` call is what makes the hook synchronous. `vim.pack.add` waits for
+installs to finish, but `vim.system` without `:wait()` would return before
+`make` did, so the extension load a few lines later would still find no `.so`.
+The hook is registered before the first `add` because `lock_sync` can install
+the lockfile entries that are missing from disk on that first call.
 
-I rebuilt once by running `make` in the plugin directory, and the extension now
+A manual `make` in the plugin directory repaired it, and the extension now
 loads. The `pcall` stays, because it now guards a build that can fail rather
 than one that never happened. The hook only runs on install or update, so it
-would not have fixed an already-installed plugin with a missing `build/`; the
+would not repair an already-installed plugin with a missing `build/`. The
 manual `make` was the actual repair. It also does not check `make`'s exit code,
 so a failed build is still silent. A more robust version would inspect the
 result of `:wait()` and notify when `result.code ~= 0`.
@@ -130,35 +129,35 @@ result of `:wait()` and notify when `result.code ~= 0`.
 ## When the Plugin Directory Loads
 
 `vim.pack.add` has a `load` option, and the docs give its default as `false`
-during `init.lua` sourcing and `true` afterwards. That timing matters more than
-it looks.
+during `init.lua` sourcing and `true` afterwards. That default decides which
+loading behavior this configuration gets.
 
 Every `vim.pack.add` call that actually runs here runs while `init.lua` is being
 sourced, because each one sits at the top of a module that `init.lua` requires.
-So `add` behaves like `:packadd!`: the plugin is installed and its directory
+So `add` behaves like `:packadd!`. The plugin is installed and its directory
 joins the runtimepath, but its `plugin/` files and `ftdetect/` scripts are not
 sourced at that moment.
 
-They are not lost, either. Neovim's normal startup scan sources them once
+They are sourced later. Neovim's normal startup scan picks them up once
 `init.lua` has finished, because the directory is on the runtimepath by then.
 `:scriptnames` shows the order plainly. On this machine `init.lua` is entry 3.
-Entry 4 is already a pack file — the colorscheme, which `:colorscheme` sources
+Entry 4 is already the colorscheme file, a pack file that `:colorscheme` sources
 through `packpath`. The first `plugin/` file is entry 8.
 
-The consequence is narrower than it first looks, but it is not nothing. While
-`init.lua` runs, a plugin's commands do not exist yet. Most modules here require
-the plugin's Lua module directly and call `setup()` themselves, so the timing
-does not matter to them. Two are different. `lua/plugins/vim-tmux-navigator.lua`
-binds `<C-h>` and the others to the `TmuxNavigate*` commands defined in the
-plugin's `plugin/tmux_navigator.vim`. `lua/plugins/nvim-surround.lua` never
-calls `setup()`, so its `ys`, `ds`, and `cs` mappings come from
+The consequence is limited but real. While `init.lua` runs, a plugin's commands
+do not exist yet. Most modules here require the plugin's Lua module directly and
+call `setup()` themselves, so the timing does not matter to them. Two do
+something else. `lua/plugins/vim-tmux-navigator.lua` binds `<C-h>` and the others
+to the `TmuxNavigate*` commands defined in the plugin's
+`plugin/tmux_navigator.vim`. `lua/plugins/nvim-surround.lua` never calls
+`setup()`, so its `ys`, `ds`, and `cs` mappings come from
 `plugin/nvim-surround.lua`. Both work because a keymap resolves its command when
-you press it, not when you set it. But both depend on the deferred scan, which
-is the part I had not checked when I first wrote this.
+it is pressed, not when it is set. Both also depend on the deferred scan, which
+is easy to miss.
 
-## Commenting Out Is Not Removing
+## What Commenting Out Leaves Behind
 
-`lua/plugins/zenbones.lua` is an empty call:
+`lua/plugins/zenbones.lua` is an empty call.
 
 ```lua
 vim.pack.add({
@@ -169,32 +168,35 @@ vim.pack.add({
 -- vim.cmd.colorscheme('zenbones')
 ```
 
-The require in `init.lua` is commented out too. `manila.nvim` is the
-colorscheme now. `zenbones.nvim`, `lush.nvim`, and `cutiepro.nvim` are still
-installed and still in the lockfile. `vim.pack.get()` returns all forty-two,
-thirty-nine of them marked `active = true`. `cutiepro.nvim` has no reference
-anywhere in the Lua tree outside the lockfile.
+The require in `init.lua` is commented out too. `manila.nvim` is the colorscheme
+now. `zenbones.nvim`, `lush.nvim`, and `cutiepro.nvim` are still installed and
+still in the lockfile. `vim.pack.get()` returns all forty-two, thirty-nine of
+them marked `active = true`. `cutiepro.nvim` has no reference anywhere in the
+Lua tree outside the lockfile.
 
-Removing a spec stops it loading. It does not remove it from disk, and it does
-not remove its lockfile entry. That takes `vim.pack.del`, which I have not run
-here. If I ran it, I would remove the spec first, or the plugin would be
-reinstalled on the next start, and I would pass `{ force = true }` if the plugin
-were still active.
+Removing a spec stops the plugin loading. It does not remove it from disk or
+from the lockfile. That takes `vim.pack.del`, which I have not run here. The
+spec has to go first, or `add` reinstalls the plugin on the next start, and an
+active plugin also needs `{ force = true }`.
 
-The empty `add({})` is dead code here: I commented out the `require` at line 36.
-If it were the first `vim.pack` call in a session, it would create
-`site/pack/core/opt` and run the lockfile sync, installing any lockfile entries
-missing from disk. On any later call it does nothing. The empty spec itself
-registers no plugin.
+The empty `add({})` is dead code here, because the `require` at line 36 is
+commented out. If it were the first `vim.pack` call in a session, it would
+create `site/pack/core/opt` and run the lockfile sync, installing any lockfile
+entries missing from disk. On any later call it does nothing.
 
-## What I Have Not Run
+## Conclusion
 
-I have not run `vim.pack.update()` or a rollback. The lockfile is what a
-rollback would restore from, `vim.pack.update(nil, { target = 'lockfile' })` per
-the docs. `vim.pack.add` does not check the revision of an already-installed
-plugin, so the lockfile alone does not move an existing checkout to the recorded
-revision. But I am not going to describe the buffer or the result of an update I
-have not watched happen.
+`vim.pack` is a small surface made of a spec with four fields, an `add` call, a
+lockfile, and one autocommand hook. The differences from lazy.nvim are small
+and specific. `ft` and `build` were ignored because a spec is data, not a
+loading policy. The build had to move into a hook, and the hook only runs when
+the plugin is installed or updated. The plugin directories loaded after
+`init.lua`, which was harmless here because the modules load Lua directly or
+resolve commands at press time. Commenting out a spec stopped the plugin
+loading without removing it.
+
+The configuration works because each of those behaviors is accounted for now,
+not because `vim.pack` behaves like lazy.nvim.
 
 ## Related Posts
 
