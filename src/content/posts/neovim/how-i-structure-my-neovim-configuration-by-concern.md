@@ -419,6 +419,7 @@ own post. Everything in this post runs on Neovim alone.
 - [How I Keep Shared LSP Policy in One Neovim Module](/posts/neovim/how-i-keep-shared-lsp-policy-in-one-neovim-module/)
 - [How I Configure Formatting in Neovim](/posts/neovim/how-i-configure-formatting-in-neovim/)
 - [How I Configure Linting in Neovim](/posts/neovim/how-i-configure-linting-in-neovim/)
+- [How I Load Plugins with vim.pack in Neovim](/posts/neovim/how-i-load-plugins-with-vim-pack-in-neovim/)
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
 - [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
 - [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
