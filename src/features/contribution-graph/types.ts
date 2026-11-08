@@ -3,7 +3,7 @@ export interface ContributionDay {
   count: number
 }
 
-export type ContributionLevel = 0 | 1 | 2 | 3 | 4 | 5
+export type ContributionLevel = 0 | 1 | 2 | 3 | 4
 
 export interface CalendarCell extends ContributionDay {
   level: ContributionLevel

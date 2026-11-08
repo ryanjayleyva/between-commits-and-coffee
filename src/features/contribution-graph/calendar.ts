@@ -85,34 +85,21 @@ export function getMonthLabels(weeks: ContributionWeek[]): MonthLabel[] {
   return labels
 }
 
-// Matches Codeberg's ActivityHeatmap color indexing exactly:
-//   max = ceil(maxCount * 4 / 5)
-//   level = count<=0 ? 1
-//         : count>=max ? 5
-//         : ceil(count * 3 / max) + 1
-// (the Math.min(5, ...) clamp is defensive, not part of Codeberg's formula)
-function calculateCodebergLevel(count: number, max: number): ContributionLevel {
-  if (count <= 0) return 1
-  if (count >= max) return 5
-  return Math.min(5, Math.ceil((count * 3) / max) + 1) as ContributionLevel
+// Matches GitHub's contribution levels: 0 for no activity, then quartiles of
+// the busiest day (1 = lightest, 4 = darkest).
+function calculateLevel(count: number, maxCount: number): ContributionLevel {
+  if (count <= 0) return 0
+  return Math.min(4, Math.ceil((count * 4) / maxCount)) as ContributionLevel
 }
 
 export function calculateLevels(weeks: ContributionWeek[]): CalendarWeek[] {
   const counts = weeks.flatMap(week => week.days.map(day => day.count))
   const maxCount = Math.max(0, ...counts)
 
-  if (maxCount === 0) {
-    return weeks.map(week => ({
-      days: week.days.map(day => ({ ...day, level: 1 as const })),
-    }))
-  }
-
-  const max = Math.ceil((maxCount * 4) / 5)
-
   return weeks.map(week => ({
     days: week.days.map(day => ({
       ...day,
-      level: calculateCodebergLevel(day.count, max),
+      level: calculateLevel(day.count, maxCount),
     })),
   }))
 }
