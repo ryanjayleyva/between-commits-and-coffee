@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import CodebergContributions from '@/features/contribution-graph/CodebergContributions.astro'
+import GithubContributions from '@/features/contribution-graph/GithubContributions.astro'
 
 const fetchMock = vi.fn<typeof fetch>()
 
@@ -14,7 +14,7 @@ function heatmapEntry(isoDateTime: string, contributions: number) {
 
 async function renderContributions() {
   const container = await AstroContainer.create()
-  return container.renderToString(CodebergContributions, {
+  return container.renderToString(GithubContributions, {
     props: {
       username: 'rjl',
       timeZone: 'UTC',
@@ -33,7 +33,7 @@ afterEach(() => {
   fetchMock.mockReset()
 })
 
-describe('CodebergContributions', () => {
+describe('GithubContributions', () => {
   it('shows the total number of contributions', async () => {
     respondWith([
       heatmapEntry('2026-10-15T12:00:00Z', 3),
@@ -69,7 +69,7 @@ describe('CodebergContributions', () => {
   })
 
   it('shows an alert instead of the graph when loading fails', async () => {
-    vi.spyOn(console, 'error').mockImplementation(() => { })
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     respondWith({}, 500)
 
     const html = await renderContributions()

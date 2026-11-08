@@ -1,7 +1,7 @@
 ---
 import PostLinks from '@/components/PostLinks/PostLinks.astro'
 import Socials from '@/components/Socials/Socials.astro'
-import CodebergContributions from '@/features/contribution-graph/CodebergContributions.astro'
+import GithubContributions from '@/features/contribution-graph/GithubContributions.astro'
 import type { PostLink } from '@/lib/content'
 import './hero.css'
 
@@ -23,6 +23,6 @@ const { heading, subHeading, postLinks, codebergUsername, timeZone } =
   </h1>
   <p class="hero__subheading">{subHeading}</p>
   <Socials />
-  <CodebergContributions username={codebergUsername} timeZone={timeZone} />
+  <GithubContributions username={codebergUsername} timeZone={timeZone} />
   <PostLinks links={postLinks} />
 </section>
