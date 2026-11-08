@@ -1,11 +1,12 @@
 ---
+import { GITHUB_TOKEN } from 'astro:env/server'
 import {
   calculateLevels,
   generateRollingCalendar,
   getMonthLabels,
 } from '@/features/contribution-graph/calendar'
-import { fetchCodebergContributions } from '@/features/contribution-graph/codeberg'
 import { formatISODateLong } from '@/features/contribution-graph/dates'
+import { fetchGithubContributions } from '@/features/contribution-graph/github'
 import type { CalendarWeek } from '@/features/contribution-graph/types'
 import './github-contributions.css'
 
@@ -23,7 +24,11 @@ let weeks: CalendarWeek[] = calculateLevels(
 let error: string | null = null
 
 try {
-  const contributions = await fetchCodebergContributions(username, {
+  if (!GITHUB_TOKEN) {
+    throw new Error('GITHUB_TOKEN is not set')
+  }
+  const contributions = await fetchGithubContributions(username, {
+    token: GITHUB_TOKEN,
     timeZone,
     endDate,
   })
@@ -32,7 +37,7 @@ try {
     generateRollingCalendar(countsByDate, { timeZone, endDate })
   )
 } catch (e) {
-  console.error('Failed to fetch Codeberg contributions:', e)
+  console.error('Failed to fetch GitHub contributions:', e)
   error = 'Failed to load contributions'
 }
 

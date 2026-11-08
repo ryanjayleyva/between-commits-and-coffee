@@ -9,12 +9,11 @@ interface Props {
   heading: string
   subHeading: string
   postLinks?: PostLink[]
-  codebergUsername: string
+  githubUsername: string
   timeZone: string
 }
 
-const { heading, subHeading, postLinks, codebergUsername, timeZone } =
-  Astro.props
+const { heading, subHeading, postLinks, githubUsername, timeZone } = Astro.props
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
@@ -23,6 +22,6 @@ const { heading, subHeading, postLinks, codebergUsername, timeZone } =
   </h1>
   <p class="hero__subheading">{subHeading}</p>
   <Socials />
-  <GithubContributions username={codebergUsername} timeZone={timeZone} />
+  <GithubContributions username={githubUsername} timeZone={timeZone} />
   <PostLinks links={postLinks} />
 </section>
