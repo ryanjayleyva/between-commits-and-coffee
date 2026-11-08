@@ -8,8 +8,8 @@ export const SITE = {
   description:
     'Things I’ve learned building software, and things I’m still figuring out.',
   url: site,
-  // Bucket Codeberg heatmap timestamps into calendar days.
-  // Match the timezone you use when viewing Codeberg for day-level parity.
+  // Decides what "today" is for the contribution graph's rolling year.
+  // Match the timezone set on your GitHub profile for day-level parity.
   timeZone: 'Asia/Manila',
 } as const
 

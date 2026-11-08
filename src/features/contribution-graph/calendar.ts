@@ -16,8 +16,7 @@ const DAYS_IN_WEEK = 7
 const DAYS_IN_ONE_YEAR = 365
 const MAX_WEEKS = 53
 
-// Mirrors Codeberg's vue-calendar-heatmap calendar construction using civil
-// dates in a pinned timezone:
+// Builds a rolling-year calendar using civil dates in a pinned timezone:
 //   endDate = today
 //   startDate = endDate - 365
 //   pad to the Sunday on/before start through the Saturday on/after end
@@ -58,7 +57,7 @@ export function generateRollingCalendar(
   return weeks.slice(-MAX_WEEKS)
 }
 
-// Codeberg labels the first full week of each month (week index >= 1).
+// Labels the first full week of each month (week index >= 1).
 export function getMonthLabels(weeks: ContributionWeek[]): MonthLabel[] {
   const labels: MonthLabel[] = []
 

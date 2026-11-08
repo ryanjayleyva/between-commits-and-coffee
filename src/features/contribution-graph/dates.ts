@@ -1,7 +1,5 @@
 // Civil-date helpers for a fixed IANA timezone.
-// Codeberg buckets heatmap entries with the browser's local calendar day
-// (new Date(ts * 1000).toDateString()). We pin one timezone so build
-// output is deterministic and matches that viewer's Codeberg graph.
+// We pin one timezone so the build output is deterministic.
 
 export function toISODateInTimeZone(date: Date, timeZone: string): string {
   const parts = zonedParts(date, timeZone)
