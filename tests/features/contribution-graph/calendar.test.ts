@@ -87,23 +87,22 @@ describe('getMonthLabels', () => {
 })
 
 describe('calculateLevels', () => {
-  it('gives every day level 1 when there is no activity', () => {
+  it('gives every day level 0 when there is no activity', () => {
     const [week] = calculateLevels([weekWithCounts([0, 0, 0])])
 
-    expect(week.days.map(day => day.level)).toEqual([1, 1, 1])
+    expect(week.days.map(day => day.level)).toEqual([0, 0, 0])
   })
 
-  it('scales levels against 80% of the busiest day', () => {
-    // maxCount 10 -> max = ceil(10 * 4 / 5) = 8
-    const [week] = calculateLevels([weekWithCounts([0, 1, 2, 5, 7, 8, 10])])
+  it('scales levels in quarters of the busiest day', () => {
+    const [week] = calculateLevels([weekWithCounts([0, 1, 3, 5, 6, 8, 9, 12])])
 
-    expect(week.days.map(day => day.level)).toEqual([1, 2, 2, 3, 4, 5, 5])
+    expect(week.days.map(day => day.level)).toEqual([0, 1, 1, 2, 2, 3, 3, 4])
   })
 
   it('gives the only active day the top level', () => {
     const [week] = calculateLevels([weekWithCounts([1, 0])])
 
-    expect(week.days.map(day => day.level)).toEqual([5, 1])
+    expect(week.days.map(day => day.level)).toEqual([4, 0])
   })
 
   it('keeps the date and count of each day', () => {
