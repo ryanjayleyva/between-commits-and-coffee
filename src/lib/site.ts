@@ -19,7 +19,7 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'Codeberg', href: 'https://codeberg.org/rjl' },
+  { label: 'GitHub', href: 'https://github.com/ryanjayleyva' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ryanjayleyva' },
   { label: 'Instagram', href: 'https://www.instagram.com/slammedwigo' },
 ]
