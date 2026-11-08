@@ -32,7 +32,7 @@ Same machine as both, macOS on Apple Silicon with a current stable
 [Neovim](https://github.com/neovim/neovim) from Homebrew at 0.12 as of this
 writing, and `~/.config/nvim` a Stow symlink into `~/env/shared`. The
 runtimepath config discovery this file depends on landed in 0.11, so this post
-assumes at least that. The repository is at https://codeberg.org/rjl/env under
+assumes at least that. The repository is at https://github.com/ryanjayleyva/env under
 `shared/.config/nvim/`.
 
 ## TL;DR

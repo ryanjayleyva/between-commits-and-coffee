@@ -43,7 +43,7 @@ convention the previous post depends on landed in 0.11, along with
 `vim.lsp.enable()`, so this post assumes at least that. Every plugin version
 here is pinned in `nvim-pack-lock.json` and installed at that revision, which is
 what lets me write down line numbers. The repository is at
-https://codeberg.org/rjl/env under `shared/.config/nvim/`.
+https://github.com/ryanjayleyva/env under `shared/.config/nvim/`.
 
 ## TL;DR
 

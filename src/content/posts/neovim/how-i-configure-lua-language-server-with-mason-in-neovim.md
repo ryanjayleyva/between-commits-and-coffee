@@ -16,7 +16,7 @@ few things it depends on.
 
 The server lives in a directory I never `require`, `lsp/`, one file per server.
 The other sixteen follow the same shape and stay in the repository at
-https://codeberg.org/rjl/env under `shared/.config/nvim/lsp/`. The shared LSP
+https://github.com/ryanjayleyva/env under `shared/.config/nvim/lsp/`. The shared LSP
 module this file borrows from is covered in
 [How I Keep Shared LSP Policy in One Neovim Module](/posts/neovim/how-i-keep-shared-lsp-policy-in-one-neovim-module/),
 and the base this configuration sits on comes from an earlier post,
