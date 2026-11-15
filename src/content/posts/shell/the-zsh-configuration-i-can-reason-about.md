@@ -22,8 +22,8 @@ machine, I call it out.
 
 ## TL;DR
 
-There isn't much to it. One 73-line `~/.zshrc` sets the environment, history, and
-`PATH`, initializes completion, loads zoxide, Powerlevel10k, and
+There isn't much to it. One 73-line `~/.zshrc` sets the environment, history,
+and `PATH`, initializes completion, loads zoxide, Powerlevel10k, and
 zsh-autosuggestions, and defines a handful of aliases. No framework, no plugin
 manager, no files to chase. Startup lands around 30 ms.
 
@@ -47,8 +47,8 @@ stow .
 
 There is no platform switch anymore. An earlier version split machine-specific
 bits into a separate file behind a `uname` check. I deleted that because I only
-use one platform, and a branch that never runs is something I'd have to
-remember exists. If I add a Linux box, I'll deal with it then.
+use one platform, and a branch that never runs is something I'd have to remember
+exists. If I add a Linux box, I'll deal with it then.
 
 `~/.zshenv` is the one file outside the repo. Its entire contents are
 `. "$HOME/.cargo/env"`, which puts `~/.cargo/bin` on `PATH` for Rust tooling.
@@ -98,8 +98,8 @@ The four `HIST_*` options are about duplicates and whitespace. I'll be honest
 that they overlap. `HIST_IGNORE_ALL_DUPS` already drops older copies of a
 repeated command, which covers what `HIST_IGNORE_DUPS` (consecutive repeats) and
 `HIST_SAVE_NO_DUPS` (no duplicates in the file) do. I kept all three because
-they don't conflict, and I haven't felt the need to prune them. `HIST_REDUCE_BLANKS`
-trims extra spaces before a command is stored.
+they don't conflict, and I haven't felt the need to prune them.
+`HIST_REDUCE_BLANKS` trims extra spaces before a command is stored.
 
 ## PATH
 
@@ -154,9 +154,9 @@ compinit -C -d "$ZSH_CACHE_DIR/zcompdump"
 file. The `fpath` line adds Homebrew's completion directory so installed tools
 can be found.
 
-`-C` loads an existing dump and skips the re-scan. If the dump doesn't exist yet,
-`compinit -C` builds it anyway, which I tested in a clean directory. So there is
-no first-run branch to maintain.
+`-C` loads an existing dump and skips the re-scan. If the dump doesn't exist
+yet, `compinit -C` builds it anyway, which I tested in a clean directory. So
+there is no first-run branch to maintain.
 
 `-C` also skips the check for _new_ completion files. Install a tool with a
 completion after the dump exists and it won't show up until the dump is deleted.
@@ -185,9 +185,9 @@ what `${(%):-%n}` in the filename expands to. Later starts source that cached
 file early, so a usable prompt shows up while the rest of the shell warms up.
 The `[[ -r ... ]]` guard makes it a no-op until the cache exists.
 
-It isn't the very first line in the file. `export HOMEBREW_PREFIX` sits above it,
-and that's fine because it prints nothing. The rule is that nothing before the
-instant prompt may write to the terminal.
+It isn't the very first line in the file. `export HOMEBREW_PREFIX` sits above
+it, and that's fine because it prints nothing. The rule is that nothing before
+the instant prompt may write to the terminal.
 
 The theme and its config load later.
 
