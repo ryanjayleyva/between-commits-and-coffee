@@ -9,6 +9,7 @@ const config: Config = {
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'es5',
+  proseWrap: 'always',
 
   plugins: ['prettier-plugin-astro', '@ianvs/prettier-plugin-sort-imports'],
 
