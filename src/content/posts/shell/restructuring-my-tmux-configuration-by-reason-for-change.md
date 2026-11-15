@@ -2,11 +2,11 @@
 title: 'Restructuring My Tmux Configuration by Reason for Change'
 description:
   'A walkthrough of my small, plugin-free tmux configuration on macOS with tmux
-  3.7c from Homebrew, split into five files by reason for change, including the
-  scripts that turn tmux into a persistent workspace and the tradeoffs behind
-  keeping it simple.'
-published: September 7, 2026
-updated: September 21, 2026
+  3.8 from Homebrew, split into five files by reason for change, including the
+  wrapper script, the Neovim pane navigation and the pi popup that make tmux a
+  persistent workspace.'
+published: September 11, 2026
+updated: November 15, 2026
 tags: ['tmux', 'shell', 'macos']
 ---
 
@@ -16,26 +16,29 @@ behavior in `options.conf`. When I want to change how a key behaves I know the
 file before I open an editor. The edit loop is find the file, change a line,
 press `C-a r`.
 
-This is not a big config. The five files add up to about seventy lines, one
-screen you could read top to bottom. Splitting it is not about escaping an
-unmanageable file. It is a structure I carry through `~/env`, where the shell
-config and the scripts follow the same rule: small files, one concern each,
-shipped with `stow`.
+This is not a big config. The five files add up to 77 lines, comments and blank
+lines included, short enough to read top to bottom in one sitting. Splitting it
+is not about escaping an unmanageable file. It is a structure I carry through
+`~/dotfiles-macos`, where the Neovim config and the shell config follow the same
+rule. Small files, one concern each, linked with `stow`.
 
-This runs on macOS with tmux 3.7c from Homebrew. Where something is
+This runs on macOS with tmux 3.8 from Homebrew. Where something is
 version-dependent or machine-specific, I say so. There is no plugin manager
 involved and no plugin at all.
 
 ## TL;DR
 
 There isn't much to my tmux configuration. A five-line `tmux.conf` sources four
-files (options, terminal, bindings, status line) and `~/.config/tmux/tmux.conf`
-is a Stow symlink to it, so tmux finds it through its normal config discovery.
+files (options, terminal, bindings, status line), and `~/.config/tmux` is a
+symlink to the `.config/tmux` directory in my dotfiles repo, so tmux finds it
+through its normal config discovery.
 
 I don't use a plugin manager, and there are no plugins. Two scripts in
-`~/env/shared/scripts/bin/` round out the workflow: a wrapper that builds a
-three-pane workspace, and a shared agent-popup helper that two keys use to raise
-a persistent agent session without leaving the current pane.
+`~/dotfiles-macos/scripts/` round out the workflow. One builds a three-pane
+workspace, and the other raises a persistent pi session in a popup without
+leaving the current pane. The bindings also hand `C-h`, `C-j`, `C-k`, `C-l` and
+`C-\` to Neovim when it is the active pane, which is what `vim-tmux-navigator`
+needs on the tmux side.
 
 It's not meant to be a universal tmux setup. It's the multiplexer shaped to make
 this particular machine comfortable to work in, and the files are split so that
@@ -43,10 +46,10 @@ shape stays easy to edit.
 
 ## Configuration Layout
 
-The source of truth lives inside the `~/env` repo, in the `shared` tree:
+The source of truth lives in my `~/dotfiles-macos` repo.
 
 ```bash
-~/env/shared/.config/tmux/
+~/dotfiles-macos/.config/tmux/
 ├── tmux.conf          # thin orchestrator
 ├── options.conf       # session and input behavior
 ├── terminal.conf      # terminal capabilities
@@ -54,29 +57,29 @@ The source of truth lives inside the `~/env` repo, in the `shared` tree:
 └── statusline.conf    # status line
 ```
 
-`~/.config/tmux/` holds Stow symlinks, so tmux's own config discovery lands on
-`tmux.conf`. There is no `~/.tmux.conf`, and `XDG_CONFIG_HOME` is not set.
-`~/.config/tmux/tmux.conf` is one of the configuration files tmux loads, and on
-this machine it is the only one of those locations that exists, so the symlink
-is the config tmux reads.
+`~/.config/tmux` is a symlink to that directory, created by running `stow .`
+from the repo root. There is no `~/.tmux.conf`, and `XDG_CONFIG_HOME` is not
+set. tmux also looks for `~/.config/tmux/tmux.conf`, and on this machine that is
+the only location that exists, so the symlink is the config tmux reads.
 
-The orchestrator is the whole config set:
+The orchestrator is the whole config set.
 
 ```conf
 # Load shared portable config files
-source-file ~/env/shared/.config/tmux/options.conf
-source-file ~/env/shared/.config/tmux/terminal.conf
-source-file ~/env/shared/.config/tmux/bindings.conf
-source-file ~/env/shared/.config/tmux/statusline.conf
+source-file ~/.config/tmux/options.conf
+source-file ~/.config/tmux/terminal.conf
+source-file ~/.config/tmux/bindings.conf
+source-file ~/.config/tmux/statusline.conf
 ```
 
-The orchestrator does nothing but list the files in order. I source the real
-paths in `~/env`, not the symlinked copies. That keeps one source of truth, so
-`C-a r` always reloads the versioned files.
+The orchestrator does nothing but list the files in order. The two helper
+scripts live in `~/dotfiles-macos/scripts/`, which is on the Stow ignore list.
+They are not linked into `$HOME`, and the bindings and the alias call them by
+their repo path.
 
 ## Configuring Options
 
-`options.conf` sets session and input behavior:
+`options.conf` sets session and input behavior.
 
 ```conf
 # Configure general session and window behavior
@@ -98,30 +101,34 @@ Windows start at 1 with `base-index`, not the default 0. `renumber-windows`
 closes the gap when you kill a window, so your `C-a <number>` habit stays
 accurate.
 
-`extended-keys` needs a recent tmux (3.2 or newer), and `extended-keys-format`
-is a later addition. With the `csi-u` format, terminal apps get distinct key
-events instead of losing modifiers. The same keystroke that means Enter in one
-app and `C-j` in another stays tellable. That matters since `C-j`, `C-h`, and
-friends do real work in the bindings below, and is the reason the config
-requires a recent tmux.
+`extended-keys` needs a recent tmux, and `extended-keys-format` is a later
+addition. With the `csi-u` format, terminal apps get distinct key events instead
+of losing modifiers. The same keystroke that means Enter in one app and `C-j` in
+another stays tellable. That matters since `C-j`, `C-h`, and friends do real
+work in the bindings below, and is the reason the config requires a recent tmux.
+On a bare tmux 3.8 I checked that `extended-keys` is off and the format is
+`xterm`, so both lines change behavior.
 
 `escape-time` is the milliseconds tmux waits to tell an Escape from the start of
-an escape sequence. Ten is the value I want, and it is also the default in tmux
-3.7c, so the line makes that explicit rather than lowering anything. It's the
-number Neovim users tend to land on. I keep it for the editor, not for tmux.
+an escape sequence. Ten is the value I want, and on a bare tmux 3.8 it is
+already the default, so the line makes that explicit rather than lowering
+anything. It's the number Neovim users tend to land on. I keep it for the
+editor, not for tmux.
 
 `mouse off` and `mode-keys vi` set the tone. Everything in this config is
 keyboard-driven. Panes are resized, selected, and copied entirely by key, so the
-mouse is dead weight once it is off. Mouse is off by default in tmux. I keep the
-line because it is a statement of intent.
+mouse is dead weight once it is off. On a bare tmux 3.8 here, mouse is on, so
+this line is doing real work. `mode-keys` would also resolve to vi on this
+machine because `EDITOR` is `nvim`, but I keep the line so it does not depend on
+that.
 
-`focus-events` forwards focus in and out to the pane. Terminal apps like Neovim
-can then react to the terminal losing focus instead of assuming the window is
-gone.
+`focus-events` forwards focus in and out to the pane. It is off by default.
+Terminal apps like Neovim can then react to the terminal losing focus instead of
+assuming the window is gone.
 
 ## Configuring the Terminal
 
-`terminal.conf` is about what the terminal underneath can actually do:
+`terminal.conf` is about what the terminal underneath can actually do.
 
 ```conf
 # Enable undercurl and terminal color support
@@ -135,24 +142,25 @@ set -as terminal-overrides ',xterm-256color:RGB'
 
 The `Smulx` and `Setulc` entries are the undercurl. `Smulx` is the styled
 underline capability and `Setulc` supplies its color. Neovim renders diagnostics
-with curly underlines today, and without these overrides tmux can mangle or drop
-them.
+with curly underlines, and these entries are how that capability gets described
+to tmux.
 
 `set -su` resets the override list to its default and `set -as` appends, so this
 file builds the effective list in order, and order matters within it. This is
 the one place in the whole config where ordering is a real dependency.
 
-`default-terminal "tmux-256color"` is the TERM every app inside tmux sees. The
-last override adds the `RGB` capability to `xterm-256color` so tmux knows
-truecolor can pass through. Without it, colors silently degrade to the 256-color
-palette.
+`default-terminal "tmux-256color"` is the TERM every app inside tmux sees. It is
+also the default on tmux 3.8, so like `escape-time` this line is explicit rather
+than corrective. The last override adds the `RGB` capability to `xterm-256color`
+so tmux knows truecolor can pass through. Without it, colors can degrade to the
+256-color palette.
 
 This file exists so the editor renders correctly, not so tmux looks good. The
 undercurls and truecolor are for the Neovim config that `EDITOR` points at.
 
 ## Configuring Bindings
 
-`bindings.conf` is where the muscle memory lives:
+`bindings.conf` is where the muscle memory lives.
 
 ```conf
 # Set prefix key
@@ -167,11 +175,7 @@ unbind '"'
 bind - split-window -v
 
 # Reload configuration
-unbind r
-bind r source-file ~/env/shared/.config/tmux/tmux.conf
-
-bind -r y run-shell -b $HOME/env/shared/scripts/bin/opencode
-bind -r u run-shell -b $HOME/env/shared/scripts/bin/pi
+bind r source-file ~/.config/tmux/tmux.conf
 
 # Resize panes with prefix
 bind j resize-pane -D 5
@@ -179,7 +183,6 @@ bind k resize-pane -U 5
 bind l resize-pane -R 5
 bind h resize-pane -L 5
 bind m resize-pane -Z
-unbind M-c
 
 # Prefix-based pane switching (use with prefix key, e.g. C-a C-h)
 bind C-h select-pane -L
@@ -188,12 +191,23 @@ bind C-k select-pane -U
 bind C-l select-pane -R
 bind C-\\ select-pane -l
 
+# Pass pane navigation keys to Neovim because vim-tmux-navigator needs tmux to hand them over
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+/)?g?\\.?(view|l?n?vim?x?|fzf)(diff)?(-wrapped)?$'"
+bind -n C-h if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+bind -n C-j if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+bind -n C-k if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+bind -n C-l if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+bind -n C-\\ if-shell "$is_vim" 'send-keys C-\\' 'select-pane -l'
+
 # Configure copy mode bindings
 bind -T copy-mode-vi C-h select-pane -L
 bind -T copy-mode-vi C-j select-pane -D
 bind -T copy-mode-vi C-k select-pane -U
 bind -T copy-mode-vi C-l select-pane -R
 bind -T copy-mode-vi C-\\ select-pane -l
+
+# Launch pi
+bind y run-shell "~/dotfiles-macos/scripts/pi-launcher.sh"
 ```
 
 The prefix moves from `C-b` to `C-a`. `C-b` is a stretch. `C-a` sits under the
@@ -204,28 +218,35 @@ never went back.
 Splits read like their shape. `|` goes vertical side-by-side and `-` stacks
 horizontally, matching the character you press. These bindings split the pane
 you are currently in, so the flow is split, work, split. The wrapper below is
-where the main pane is targeted: it names the original `main` pane explicitly
+where the main pane is targeted. It names the original `main` pane explicitly
 when it builds the initial layout.
 
-`C-a r` re-sources the orchestrator, which pulls all four files again. Editing
+`C-a r` re-sources `tmux.conf`, which pulls all four files again. Editing
 `bindings.conf` then reloading once is the entire edit loop. No server restart,
 no plugin manager, no rehash.
 
-The `-r` flags on `y` and `u` make them repeatable, so one prefix press lets you
-re-trigger either popup. `run-shell -b` runs the script in the background
-instead of pausing the pane while it works. Both point at scripts I'll get to
-shortly.
-
 Resize keys mirror Vim. `j`/`k`/`l`/`h` nudge panes in the obvious directions by
-five cells, and `m` toggles zoom. `unbind M-c` pins Alt-c as unbound so nothing
-can land on it later. Pane jumping uses Ctrl-modified `h`/`j`/`k`/`l`, and `C-\`
-flips back to the last pane. Both the prefix table and the copy-mode-vi table
-get the same pane-switch set, so navigation works whether you are at a prompt or
-busy selecting text.
+five cells, and `m` toggles zoom.
+
+### Pane Navigation and Neovim
+
+Pane jumping has two layers. The prefix layer is `C-a` followed by
+`C-h`/`C-j`/`C-k`/`C-l`, and `C-a C-\` flips back to the last pane. The
+copy-mode-vi table gets the same set, so navigation works whether you are at a
+prompt or busy selecting text.
+
+The second layer is the `bind -n` set, which needs no prefix at all. That is the
+tmux half of `vim-tmux-navigator`, the plugin my Neovim config loads. The
+`is_vim` check looks at the processes on the pane's tty and matches `vim`,
+`nvim`, `view` and `fzf` along with their variants. If the pane is running one
+of them, tmux sends the key through and the plugin on the Neovim side decides
+whether to move between splits or hand control back to tmux. If not, tmux
+selects the pane itself. The result is one set of keys for moving around, no
+matter whether the boundary is a Neovim split or a tmux pane.
 
 ## Configuring the Status Line
 
-`statusline.conf` keeps the chrome honest:
+`statusline.conf` keeps the chrome honest.
 
 ```conf
 # Configure status line and window styling
@@ -238,7 +259,7 @@ set -g status-left ""
 ```
 
 The status line sits at the top, not the bottom. In the wrapper layout below,
-the bottom edge of the main pane is given over to a scratch strip, so the top is
+the bottom of the main pane is given over to a scratch strip, so the top is
 where the status line is allowed to live.
 
 `bg=default` makes it transparent, which means it blends with the terminal
@@ -248,7 +269,8 @@ thing on screen is which window you are in.
 
 ## The Wrapper Session
 
-The `tmux-s` alias points at `~/env/shared/scripts/bin/tmux`:
+The `tmux-s` alias in `.zshrc` points at
+`~/dotfiles-macos/scripts/tmux-sessionaire.sh`.
 
 ```bash
 #!/usr/bin/env bash
@@ -263,32 +285,32 @@ command -v tmux &>/dev/null || {
   exit 1
 }
 
-if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-  tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_NAME"
-  main_pane_id="$(tmux display-message -t "$SESSION_NAME":"$WINDOW_NAME" -p '#{pane_id}')"
-  tmux split-window -h -p 10 -t "$main_pane_id"
-  tmux split-window -v -p 10 -t "$main_pane_id"
+if ! tmux has-session -t "=$SESSION_NAME" 2>/dev/null; then
+  main_pane_id="$(tmux new-session -d -s "$SESSION_NAME" -n "$WINDOW_NAME" -P -F '#{pane_id}')"
+  tmux split-window -h -l 10% -t "$main_pane_id"
+  tmux split-window -v -l 10% -t "$main_pane_id"
   tmux select-pane -t "$main_pane_id"
 fi
 
 if [[ -n "${TMUX:-}" ]]; then
-  tmux switch-client -t "$SESSION_NAME"
+  tmux switch-client -t "=$SESSION_NAME"
 else
-  tmux attach-session -t "$SESSION_NAME" || {
-    printf 'tmux attach failed for session %s\n' "$SESSION_NAME" >&2
-    exit 1
-  }
+  exec tmux attach-session -t "=$SESSION_NAME"
 fi
 ```
 
 It is a bash script, not a tmux config hook, because it is multi-step and has to
-run before tmux attaches. It lives in `~/env/shared/scripts/bin` so it is
-versioned and portable, and it runs under `bash` regardless of the interactive
+run before tmux attaches. It runs under `bash` regardless of the interactive
 shell.
 
-On first run it creates a `dev` session with a `main` window, then splits off
-two thin panes from the main pane: a 10% strip on the right and a 10% strip
-along the bottom. The main pane stays selected.
+On first run it creates a `dev` session with a `main` window and captures the
+pane id straight from `new-session`. Then it splits off two thin panes from the
+main pane, a 10% strip on the right and a 10% strip below it. The main pane
+stays selected.
+
+The `=` prefix on the session name makes tmux match it exactly. Without it, tmux
+treats the target as a prefix match, so a session named `dev-something` could be
+picked up by accident.
 
 The layout is the point of the script. One big pane owns the work, the right
 rail is a good place for something like a test runner or log stream, and the
@@ -302,74 +324,52 @@ them.
 This lives behind the alias and nowhere else. Plain tmux keeps its default
 behavior, so the opinionated layout only shows up when I ask for it.
 
-## The Agent Popups
+## The pi Popup
 
-`y` and `u` from the bindings point at two thin wrappers, `opencode` and `pi`.
-Both resolve their own directory and exec the same helper with an agent name:
-
-```bash
-#!/usr/bin/env bash
-
-set -euo pipefail
-
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-exec "$script_dir/../libexec/agent-popup.sh" opencode
-```
-
-The helper, `libexec/agent-popup.sh`, does the actual work:
+`C-a y` runs `pi-launcher.sh`, which raises pi, the terminal coding agent I use,
+in a popup over whatever I am doing. This is where tmux and pi meet.
 
 ```bash
 #!/usr/bin/env bash
 
 set -euo pipefail
 
-agent_name="${1:-}"
-
-if [[ -z "$agent_name" ]]; then
-  printf '%s\n' "Usage: $0 <agent-name>" >&2
-  exit 1
-fi
-
-pane_path="$(tmux display-message -p -F '#{pane_current_path}' 2>/dev/null)" || exit 0
-
-if command -v md5sum &>/dev/null; then
-  path_hash="$(printf '%s' "$pane_path" | md5sum 2>/dev/null | cut -d' ' -f1 | cut -c1-8)"
-else
-  path_hash="$(printf '%s' "$pane_path" | md5 -q 2>/dev/null | cut -c1-8)"
-fi
-
-session="$agent_name-$path_hash"
+pane_path="$(tmux display-message -p '#{pane_current_path}')"
+path_hash="$(printf '%s' "$pane_path" | md5 -q | cut -c1-8)"
+session="pi-$path_hash"
 
 if ! tmux has-session -t "$session" 2>/dev/null; then
-  tmux new-session -d -s "$session" -c "$pane_path" "$agent_name" &>/dev/null || exit 0
+  tmux new-session -d -s "$session" -c "$pane_path" pi
 fi
 
-tmux display-popup -w 80% -h 80% -E "tmux attach-session -t \"$session\"" 2>/dev/null || exit 0
+tmux display-popup -w 80% -h 80% -E "tmux attach-session -t $session"
 ```
 
 The trick is the session name. It hashes the current directory, so the session
-is `opencode-<hash>` or `pi-<hash>` keyed to where the pane is. First press in a
-directory creates a detached session that starts the agent there. Every later
-press in the same directory attaches to the same session. The agent keeps its
-state, the popup reappears over your panes, and nothing is spawned into the
-working pane.
+is `pi-<hash>` keyed to where the pane is. First press in a directory creates a
+detached session that starts pi there. Every later press in the same directory
+attaches to the same session. pi keeps its state, the popup reappears over your
+panes, and nothing is spawned into the working pane.
 
-The hash is computed portably. The script prefers `md5sum` when it is available,
-otherwise it uses macOS's `md5 -q`, and takes the first eight hex characters in
-either case. Only eight are used, which is plenty for directory uniqueness in
-practice.
+The hash uses macOS's `md5 -q` and takes the first eight hex characters. That is
+plenty for directory uniqueness in practice, and it is not portable to Linux,
+where the command is `md5sum`. This script only has to work on this machine.
 
 `display-popup` opens 80% wide and 80% tall, centered over everything. When I
-close the popup the agent session stays alive in the background, detached. That
-is a feature and a cost. State survives, but so does the session. They sit
-around until killed by hand, one per directory that has ever spawned one.
+close the popup the pi session stays alive in the background, detached. That is
+a feature and a cost. State survives, but so does the session. They sit around
+until killed by hand, one per directory that has ever spawned one.
 
 ## Tradeoffs and Caveats
 
 **The prefix is `C-a`, and that costs you an app key.** A literal Ctrl-A in a
 shell or in readline takes two presses (`C-a` then `C-a`). The escape hatch is
 firmly in place, but it is a thing you must get used to.
+
+**The no-prefix navigation keys are taken from every other program.** Outside
+Neovim, vim and fzf, `C-l` selects the pane to the right instead of clearing the
+screen, and `C-h`, `C-j` and `C-k` stop reaching the shell as well. That is the
+price of one set of keys for both Neovim splits and tmux panes.
 
 **Mouse is entirely off.** No drag-selecting, no mouse wheel scrollback inside
 panes, no click-to-focus. Keyboard only. That is a deliberate choice, and some
@@ -383,21 +383,24 @@ a plain pane, plain tmux is still there, untouched.
 name. The only glanceable data is the highlighted current window. Useful signals
 were traded away for a quiet screen.
 
-**Agent popups leave sessions behind.** Every directory with a `y` or `u` press
-owns a detached session forever. They are cheap and invisible, but they
-accumulate, and the cleanup is manual.
+**pi popups leave sessions behind.** Every directory with a `C-a y` press owns a
+detached session forever. They are cheap and invisible, but they accumulate, and
+the cleanup is manual.
+
+**The pi launcher is macOS only.** It calls `md5 -q` directly and has no
+fallback. It also runs with `set -e` and no guards, so pressing the key
+somewhere it cannot work simply does nothing visible.
 
 **This config assumes a recent tmux.** `extended-keys` and
-`extended-keys-format` are recent additions, and `focus-events` is older but not
-universal. I do not guard any of them. On an old distro tmux this config would
-error at startup, which is fine for my machines and worth knowing before you
-copy it.
+`extended-keys-format` are recent additions, and I do not guard either of them.
+On an old distro tmux this config would error at startup, which is fine for my
+machine and worth knowing before you copy it.
 
 ## Where I Landed
 
-The load order is:
+The load order is this.
 
-```
+```text
 1. options
 2. terminal
 3. bindings
@@ -410,9 +413,9 @@ order in the shell post. Only a few lines are real dependencies, and everything
 else would survive reordering.
 
 I won't pretend the split is required. tmux would load a single `~/.tmux.conf`
-with the same result, and at seventy lines you could read it all in one screen.
-One file is the reasonable default, and I have no argument against it for a
-config that small.
+with the same result, and at 77 lines you could read it all in one sitting. One
+file is the reasonable default, and I have no argument against it for a config
+that small.
 
 I keep five files anyway, for three reasons that hold even at this size.
 
@@ -420,10 +423,10 @@ The first is diff scoping. A change to keys touches `bindings.conf` and nothing
 else, so every commit and every git log entry names the concern that moved. That
 stays useful no matter how small the config is.
 
-The second is consistency with the rest of `~/env`. The shell config and the
-scripts follow the same shape, small files, one concern each, shipped through
-stow. When the tmux files follow the same rule, the structure of the whole
-environment is learnable once.
+The second is consistency with the rest of `~/dotfiles-macos`. The Neovim config
+and the shell config follow the same shape, small files, one concern each,
+linked through stow. When the tmux files follow the same rule, the structure of
+the whole environment is learnable once.
 
 The third is that the split is nearly free. Reloading re-parses all five files
 in a blink, and the orchestrator is five obvious lines, so the cost is the tiny
@@ -441,4 +444,4 @@ for me to change without having to think about where something lives.
 ## Related Posts
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
-- [Forty-Four Lines of WezTerm Configuration](/posts/terminal/forty-four-lines-of-wezterm-configuration/)
+- [Forty-Eight Lines of WezTerm Configuration](/posts/terminal/forty-eight-lines-of-wezterm-configuration/)
