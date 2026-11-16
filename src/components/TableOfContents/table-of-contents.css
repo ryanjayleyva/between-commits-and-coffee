@@ -3,7 +3,7 @@
 }
 
 /* Cap the list so sticky's bottom stop (footer pushes the post column up) never rides under the header band */
-@media (min-width: 68rem) {
+@media (min-width: 74rem) {
   .toc {
     display: block;
     position: sticky;
@@ -11,6 +11,11 @@
     max-height: calc(100dvh - 4.75rem - 7.5rem);
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+
+  .toc::-webkit-scrollbar {
+    display: none;
   }
 }
 
