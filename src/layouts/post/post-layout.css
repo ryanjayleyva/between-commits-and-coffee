@@ -6,15 +6,15 @@
   scroll-margin-top: 3.75rem;
 }
 
-@media (min-width: 68rem) {
+@media (min-width: 74rem) {
   .post-layout {
     display: grid;
-    grid-template-columns: minmax(0, 38rem) 12rem;
+    grid-template-columns: minmax(0, 38rem) 16rem;
     grid-template-areas:
       'post toc'
       'content toc';
     column-gap: 1.5rem;
-    width: calc(100% + 12rem + 1.5rem);
+    width: calc(100% + 16rem + 1.5rem);
   }
 
   .post-layout > .post {
