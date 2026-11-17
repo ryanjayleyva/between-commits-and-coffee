@@ -445,3 +445,4 @@ for me to change without having to think about where something lives.
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
 - [Forty-Eight Lines of WezTerm Configuration](/posts/terminal/forty-eight-lines-of-wezterm-configuration/)
+- [Setup Neovim from Scratch with Native vim.pack and LSP](/posts/neovim/setup-neovim-from-scratch-with-native-vim-pack-and-lsp/)

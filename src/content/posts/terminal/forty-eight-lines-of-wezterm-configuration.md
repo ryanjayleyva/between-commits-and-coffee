@@ -186,3 +186,4 @@ of them is a line edit. That convenience has been the real payoff.
 
 - [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
 - [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
+- [Setup Neovim from Scratch with Native vim.pack and LSP](/posts/neovim/setup-neovim-from-scratch-with-native-vim-pack-and-lsp/)
