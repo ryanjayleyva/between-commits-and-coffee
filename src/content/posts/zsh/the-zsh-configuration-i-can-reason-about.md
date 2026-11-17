@@ -344,6 +344,6 @@ problem quickly. That's enough for me.
 
 ## Related Posts
 
-- [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
-- [Forty-Eight Lines of WezTerm Configuration](/posts/terminal/forty-eight-lines-of-wezterm-configuration/)
+- [Restructuring My Tmux Configuration by Reason for Change](/posts/tmux/restructuring-my-tmux-configuration-by-reason-for-change/)
+- [Forty-Eight Lines of WezTerm Configuration](/posts/wezterm/forty-eight-lines-of-wezterm-configuration/)
 - [Setup Neovim from Scratch with Native vim.pack and LSP](/posts/neovim/setup-neovim-from-scratch-with-native-vim-pack-and-lsp/)

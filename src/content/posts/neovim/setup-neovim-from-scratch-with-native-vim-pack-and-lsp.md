@@ -901,7 +901,7 @@ vim.pack.add({
 
 That lets `Ctrl-h/j/k/l` move between Neovim splits and tmux panes. The tmux
 half is in my
-[tmux post](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/).
+[tmux post](/posts/tmux/restructuring-my-tmux-configuration-by-reason-for-change/).
 
 Add the line to `init.lua`.
 
@@ -1619,6 +1619,6 @@ parsers once the CLI is ready. Give it a minute the first time.
 
 ## Related Posts
 
-- [Restructuring My Tmux Configuration by Reason for Change](/posts/shell/restructuring-my-tmux-configuration-by-reason-for-change/)
-- [The Zsh Configuration I Can Reason About](/posts/shell/the-zsh-configuration-i-can-reason-about/)
-- [Forty-Eight Lines of WezTerm Configuration](/posts/terminal/forty-eight-lines-of-wezterm-configuration/)
+- [Restructuring My Tmux Configuration by Reason for Change](/posts/tmux/restructuring-my-tmux-configuration-by-reason-for-change/)
+- [The Zsh Configuration I Can Reason About](/posts/zsh/the-zsh-configuration-i-can-reason-about/)
+- [Forty-Eight Lines of WezTerm Configuration](/posts/wezterm/forty-eight-lines-of-wezterm-configuration/)
