@@ -53,11 +53,11 @@ describe('getPostOgImagePath', () => {
 
 describe('toPostLink', () => {
   it('maps a post to its title, path and published date', () => {
-    const post = buildPost('shell/zsh', '2025-03-05', 'My zsh setup')
+    const post = buildPost('zsh/config', '2025-03-05', 'My zsh setup')
 
     expect(toPostLink(post)).toEqual({
       title: 'My zsh setup',
-      href: '/posts/shell/zsh/',
+      href: '/posts/zsh/config/',
       date: new Date('2025-03-05'),
     })
   })
