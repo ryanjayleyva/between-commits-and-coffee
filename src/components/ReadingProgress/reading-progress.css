@@ -1,0 +1,18 @@
+/* Sits above the sticky header (z-index 10) */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 0.1875rem;
+  pointer-events: none;
+}
+
+.reading-progress__bar {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-info);
+  transform: scaleX(var(--reading-progress, 0));
+  transform-origin: left;
+}
