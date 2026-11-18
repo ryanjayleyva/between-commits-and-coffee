@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro'
 import Post from '@/components/Post/Post.astro'
+import ReadingProgress from '@/components/ReadingProgress/ReadingProgress.astro'
 import TableOfContents from '@/components/TableOfContents/TableOfContents.astro'
 import Base from '@/layouts/base/Base.astro'
 import './post-layout.css'
@@ -38,6 +39,7 @@ const {
   ogImage={ogImage}
   ogImageAlt={ogImageAlt}
 >
+  <ReadingProgress />
   <div class="post-layout">
     <Post
       title={title}
