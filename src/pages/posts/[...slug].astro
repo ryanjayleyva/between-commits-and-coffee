@@ -6,6 +6,7 @@ import {
   getPosts,
   type Post as PostData,
 } from '@/lib/content'
+import { getReadingTime } from '@/lib/reading-time'
 
 export async function getStaticPaths() {
   const posts = await getPosts()
@@ -21,6 +22,7 @@ interface Props {
 
 const { post } = Astro.props
 const { Content, headings } = await render(post)
+const readingTime = getReadingTime(post.body ?? '')
 ---
 
 <PostLayout
