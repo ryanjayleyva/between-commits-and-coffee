@@ -17,6 +17,11 @@
     font-family: var(--font-geist), system-ui, sans-serif;
     font-weight: 400;
     scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   pre,
