@@ -2,7 +2,7 @@ const palette = {
   bg: '#25211F',
   fg: '#B4BDC3',
   sel: '#25211F',
-  comment: '#6E6763',
+  comment: '#918883',
 
   rose: '#DE6E7C',
   leaf: '#819B69',
@@ -15,7 +15,7 @@ const palette = {
   special: '#8D9499',
   constant: '#868C91',
   type: '#A1938C',
-  delimiter: '#867A74',
+  delimiter: '#958781',
 } as const
 
 export const zenbonesCustom = {
