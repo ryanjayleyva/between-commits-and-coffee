@@ -8,6 +8,7 @@ interface Props {
   published: Date
   updated?: Date
   tags?: string[]
+  readingTime?: number
 }
 
 const { title, description, published, updated, tags = [] } = Astro.props

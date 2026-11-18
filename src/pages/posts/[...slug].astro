@@ -31,6 +31,7 @@ const readingTime = getReadingTime(post.body ?? '')
   published={post.data.published}
   updated={post.data.updated}
   tags={post.data.tags}
+  readingTime={readingTime}
   ogImage={new URL(getPostOgImagePath(post), Astro.site)}
   ogImageAlt={post.data.title}
   headings={headings}

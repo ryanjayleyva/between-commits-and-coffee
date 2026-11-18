@@ -11,6 +11,7 @@ interface Props {
   published: Date
   updated?: Date
   tags?: string[]
+  readingTime?: number
   ogImage?: URL
   ogImageAlt?: string
   headings: MarkdownHeading[]
@@ -22,6 +23,7 @@ const {
   published,
   updated,
   tags = [],
+  readingTime,
   ogImage,
   ogImageAlt,
   headings,
@@ -43,6 +45,7 @@ const {
       published={published}
       updated={updated}
       tags={tags}
+      readingTime={readingTime}
     />
     <div class="post-layout__content">
       <slot />
