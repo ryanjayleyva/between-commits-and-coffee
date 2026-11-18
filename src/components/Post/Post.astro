@@ -11,7 +11,14 @@ interface Props {
   readingTime?: number
 }
 
-const { title, description, published, updated, tags = [] } = Astro.props
+const {
+  title,
+  description,
+  published,
+  updated,
+  tags = [],
+  readingTime,
+} = Astro.props
 
 const showUpdated =
   updated !== undefined && updated.valueOf() !== published.valueOf()
@@ -27,6 +34,14 @@ const showUpdated =
         <>
           <br />
           Updated {formatDate(updated)}
+        </>
+      )
+    }
+    {
+      readingTime !== undefined && (
+        <>
+          <br />
+          {readingTime} min read
         </>
       )
     }

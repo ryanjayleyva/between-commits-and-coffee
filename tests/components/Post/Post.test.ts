@@ -8,6 +8,7 @@ interface PostOptions {
   description?: string
   updated?: Date
   tags?: string[]
+  readingTime?: number
 }
 
 async function renderPost(options: PostOptions = {}) {
@@ -40,6 +41,14 @@ describe('Post', () => {
 
   it('omits the updated date when it matches the published date', async () => {
     expect(await renderPost({ updated: published })).not.toContain('Updated')
+  })
+
+  it('renders the reading time when given', async () => {
+    expect(await renderPost({ readingTime: 4 })).toContain('4 min read')
+  })
+
+  it('omits the reading time when not given', async () => {
+    expect(await renderPost()).not.toContain('min read')
   })
 
   it('renders each tag in a list', async () => {
