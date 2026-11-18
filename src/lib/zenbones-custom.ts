@@ -43,7 +43,7 @@ export const zenbonesCustom = {
         'comment.block',
         'punctuation.definition.comment',
       ],
-      settings: { foreground: palette.comment, fontStyle: 'italic' },
+      settings: { foreground: palette.comment },
     },
     {
       name: 'Keyword',
@@ -98,7 +98,7 @@ export const zenbonesCustom = {
         'string.docstring',
         'string.quoted.docstring',
       ],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'String punctuation',
@@ -108,7 +108,7 @@ export const zenbonesCustom = {
         'punctuation.definition.string.end',
         'punctuation.definition.string.template',
       ],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'String escape',
@@ -122,7 +122,7 @@ export const zenbonesCustom = {
     {
       name: 'Boolean',
       scope: ['constant.language.boolean', 'constant.language'],
-      settings: { foreground: palette.fg, fontStyle: 'italic' },
+      settings: { foreground: palette.fg },
     },
     {
       name: 'Number',
@@ -139,7 +139,7 @@ export const zenbonesCustom = {
         'constant.language.null',
         'constant.language.undefined',
       ],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Constant.name',
@@ -154,7 +154,7 @@ export const zenbonesCustom = {
     {
       name: 'Variable.language',
       scope: ['variable.language'],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Function',
@@ -188,17 +188,17 @@ export const zenbonesCustom = {
     {
       name: 'Support.property-value',
       scope: ['support.type.property-value', 'support.constant.property-value'],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Support.variable',
       scope: ['support.variable'],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Support.constant',
       scope: ['support.constant', 'support.type.object.module'],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Type',
@@ -315,7 +315,7 @@ export const zenbonesCustom = {
         'keyword.operator.quantifier.regexp',
         'keyword.other.quantifier.regexp',
       ],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Invalid',
@@ -343,7 +343,7 @@ export const zenbonesCustom = {
         'source.shell string.template',
         'source.shell string.interpolated',
       ],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'SQL object',
@@ -378,7 +378,7 @@ export const zenbonesCustom = {
     {
       name: 'Markup.italic',
       scope: ['markup.italic'],
-      settings: { foreground: palette.fg, fontStyle: 'italic' },
+      settings: { foreground: palette.fg },
     },
     {
       name: 'Markup.strikethrough',
@@ -413,7 +413,7 @@ export const zenbonesCustom = {
     {
       name: 'Markup.raw.block',
       scope: ['markup.raw.block', 'markup.fenced_code.block', 'markup.fenced'],
-      settings: { foreground: palette.constant, fontStyle: 'italic' },
+      settings: { foreground: palette.constant },
     },
     {
       name: 'Markup.list',
@@ -435,12 +435,12 @@ export const zenbonesCustom = {
     {
       name: 'Markup.inserted',
       scope: ['markup.inserted', 'meta.diff.header.to-file'],
-      settings: { foreground: palette.leaf, fontStyle: 'italic' },
+      settings: { foreground: palette.leaf },
     },
     {
       name: 'Markup.deleted',
       scope: ['markup.deleted', 'meta.diff.header.from-file'],
-      settings: { foreground: palette.rose, fontStyle: 'italic' },
+      settings: { foreground: palette.rose },
     },
     {
       name: 'Diff header',
