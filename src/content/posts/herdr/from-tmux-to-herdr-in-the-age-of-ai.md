@@ -157,8 +157,8 @@ enough for my work today. If I were still working as a developer, I can imagine
 using a workspace per part of a monorepo, one each for `apps/client`,
 `apps/server`, and `shared`, and orchestrating different agents across them.
 
-I'll cover my herdr configuration and workflow in a follow-up post, "Setting Up
-herdr for Agentic Development."
+I cover my herdr configuration in a follow-up post,
+[Setting Up herdr for Agentic Development](/posts/herdr/setting-up-herdr-for-agentic-development/).
 
 ## The Hidden Cost of Perfecting Your Tools
 
