@@ -1,9 +1,9 @@
 ---
 title: 'Will Rex Replace my WezTerm and Herdr Terminal Workflow?'
 description:
-  'After a couple of hours with Rex, I really enjoy it. I compare my
-  fifty-eight lines of Rex configuration to my WezTerm and herdr setup, and
-  explain why I'm still undecided.'
+  "After a couple of hours with Rex, I really enjoy it. I compare my fifty-eight
+  lines of Rex configuration to my WezTerm and herdr setup, and explain why I'm
+  still undecided."
 published: November 23, 2026
 tags: ['rex', 'herdr', 'wezterm']
 ---
