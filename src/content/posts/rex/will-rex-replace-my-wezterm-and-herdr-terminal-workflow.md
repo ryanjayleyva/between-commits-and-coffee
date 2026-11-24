@@ -5,6 +5,7 @@ description:
   lines of Rex configuration to my WezTerm and herdr setup, and explain why I'm
   still undecided."
 published: November 23, 2026
+updated: November 24, 2026
 tags: ['rex', 'herdr', 'wezterm']
 ---
 
@@ -313,8 +314,7 @@ until I'm sure. I'll come back to this after a month, and if it wins, I'll say
 so.
 
 Thank you to Superlogical for the
-[Rex](https://www.superlogical.com/rex/docs/installation) beta access, and for
-building something I enjoyed enough to write fifty-eight lines for.
+[Rex](https://www.superlogical.com/rex/docs/installation) beta access.
 
 ## Related Posts
 
