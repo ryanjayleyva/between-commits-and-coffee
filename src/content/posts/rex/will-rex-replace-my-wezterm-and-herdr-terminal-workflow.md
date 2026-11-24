@@ -216,15 +216,13 @@ sending a literal `Ctrl+a` to the pane.
 
 ## The Theme
 
-My README has a short section on themes, and it's one line long, which is to
-import the
+I use the
 [kasumi](https://github.com/ryanjayleyva/kasumi.nvim/blob/main/extras/ghostty/kasumi)
-theme into Rex.
+theme, and you can import it into Rex.
 
-That sentence hides the biggest difference from my WezTerm file. In WezTerm, the
-whole palette is Lua in a file I version. In Rex, according to the docs, the
-palette is a setting in the app's Themes page that can import Ghostty and iTerm
-themes. There's no `colors` block in `init.lua`.
+In WezTerm, the whole palette is Lua in a file I version. In Rex, according to
+the docs, the palette is a setting in the app's Themes page that can import
+Ghostty and iTerm themes. There's no `colors` block in `init.lua`.
 
 ## What Carries Over, and What Doesn't
 
@@ -245,14 +243,10 @@ Here is the honest accounting, line by line against what I use today.
   only next, previous, and a switcher.
 - **A sidebar with a middle setting.** In herdr I collapse the sidebar until
   it's just a column of numbers. It takes almost no space, and it still tells me
-  where I am and how many workspaces I have open. Rex gives me `cmd+n`, which
+  where I am and how many workspaces I have open. Rex gives me `cmd+/`, which
   shows or hides the sidebar completely. That's a light switch when I want a
   dimmer. Hidden, I lose the map, and shown, I pay for the full width. The
   middle setting is the one I used all day, and it's the one Rex doesn't have.
-- **Zoom.** My herdr config binds `prefix+m` to zoom a pane, which replaced my
-  old popup. My Rex config binds `f` to fullscreen the window, not the pane. The
-  docs show a `pane.zoom` action, so this is probably one line away, but it's a
-  gap in what I wrote.
 - **Agent status.** This is the one that matters. herdr's whole argument, in my
   first post, was cognitive friction, meaning seeing at a glance which agent is
   working, waiting, or done. Nothing in my Rex config does that.
@@ -266,8 +260,9 @@ it up, and I can't say which is more useful for how I work.
 ## Small Things I Noticed
 
 - **Reload is manual.** WezTerm watches its file and reloads on save. Rex
-  doesn't. After an edit I run `rex config reload`, and it must run on the
-  server's machine.
+  doesn't. After an edit I run `rex config reload` from the terminal or
+  `:term rex config reload` inside Neovim , and it must run on the server's
+  machine.
 - **A bad line doesn't take the file down.** `rex config check` loads the file
   without applying it and reports counts for bindings, removals, modes, and
   actions. A bad `rex` call is skipped, a Lua syntax error fails the whole load,
@@ -284,12 +279,8 @@ This post has gaps, and I'd rather list them than hide them.
 
 - **I've had a couple of hours.** Muscle memory takes longer than that, and so
   does finding out what annoys me.
-- **I can't run Rex on my work machine.** It's a company laptop, so this config
-  was written and tested somewhere else.
 - **Rex is in beta.** The macOS app and the Linux and FreeBSD servers are open
   to testers, and I have beta access, so some of what I describe may change.
-- **I haven't measured anything.** Startup, memory, and latency are all things I
-  haven't compared. That's my experience, not a benchmark.
 
 ## So, Will It Replace Them?
 
