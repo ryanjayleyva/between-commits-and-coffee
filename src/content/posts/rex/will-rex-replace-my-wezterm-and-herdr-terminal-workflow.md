@@ -1,11 +1,11 @@
 ---
 title: 'Will Rex Replace my WezTerm and Herdr Terminal Workflow?'
 description:
-  "After a couple of hours with Rex, I really enjoy it. I compare my fifty-eight
+  "After a couple of hours with Rex, I really enjoy it. I compare my fifty-five
   lines of Rex configuration to my WezTerm and herdr setup, and explain why I'm
   still undecided."
 published: November 23, 2026
-updated: November 24, 2026
+updated: November 25, 2026
 tags: ['rex', 'herdr', 'wezterm']
 ---
 
@@ -26,7 +26,7 @@ depends on what each file in my environment actually does, so I'll start there.
 Rex is both halves of my current stack, a terminal that draws the window and a
 multiplexer that owns sessions, tabs, and panes. I enjoy it, but its default
 keybindings felt like stepping into a different environment after herdr, so I
-wrote a fifty-eight-line Lua config that makes them feel like herdr again. The
+wrote a fifty-five-line Lua config that makes them feel like herdr again. The
 upside is that one file could replace both WezTerm and herdr. I'm not ready to
 say it does, and I haven't moved it into my dotfiles yet.
 
@@ -113,17 +113,20 @@ for _, k in ipairs({
   "cmd+w",
   "cmd+d",
   "shift+cmd+d",
-  "cmd+k",
   "cmd+n",
 }) do
   rex.unbind(k)
 end
 ```
 
-The first thing the file does is remove six of the client's default `cmd`
+The first thing the file does is remove five of the client's default `cmd`
 shortcuts. Shortcut priority in Rex runs from client defaults, to the config
 file, to shortcuts set in the app, so the config can remove a default instead of
 fighting it.
+
+I left `cmd+k` alone. It's the client's session switcher, and it does the job of
+the `Ctrl+a k` chord I first bound for it, so I dropped the chord and kept the
+default.
 
 I did this for the same reason I keep the `Ctrl+a` prefix. My hands already know
 one set of keys, and I don't want a second set that works by accident. That's
@@ -144,14 +147,15 @@ without any indirection. Given how small it is, I don't mind.
 
 Sessions, windows, tabs, and panes each get a block.
 
-| Area     | Binding                             | Action                                    |
-| -------- | ----------------------------------- | ----------------------------------------- |
-| Sessions | `s` `]` `[` `k` `b` `l`             | new, next, previous, switch, back, recent |
-| Sessions | `shift+r` `shift+q`                 | rename, close                             |
-| Windows  | `shift+n` `shift+x` `f`             | new, close, toggle fullscreen             |
-| Tabs     | `t` `n` `p` `shift+m`               | new, next, previous, move to new window   |
-| Panes    | `shift+\` (`\|`) `-`                | split right, split down                   |
-| Panes    | `ctrl+h` `ctrl+j` `ctrl+k` `ctrl+l` | focus left, down, up, right (no prefix)   |
+| Area     | Binding                                     | Action                                  |
+| -------- | ------------------------------------------- | --------------------------------------- |
+| Sessions | `s` `]` `[`                                 | new, next, previous                     |
+| Sessions | `shift+r` `shift+q`                         | rename, close                           |
+| Sessions | `cmd+k`                                     | switch (client default)                 |
+| Windows  | `shift+n` `shift+x` `f`                     | new, close, toggle fullscreen           |
+| Tabs     | `t` `n` `p` `shift+m`                       | new, next, previous, move to new window |
+| Panes    | `shift+\` (`\|`) `-`                        | split right, split down                 |
+| Panes    | `ctrl+a>h` `ctrl+a>j` `ctrl+a>k` `ctrl+a>l` | focus left, down, up, right             |
 
 Two of those are worth a closer look.
 
@@ -167,20 +171,21 @@ rex.bind("ctrl+a>-", "pane.split", { direction = "down" })
 needs `\\` to write a backslash, and the chord needs `shift` to reach `|`, which
 is the kind of detail I would have gotten wrong without `rex config check`.
 
-### Focus Without a Prefix
+### Focus Keeps the Prefix
 
 ```lua
-rex.bind("ctrl+h", "pane.focus.left")
-rex.bind("ctrl+j", "pane.focus.down")
-rex.bind("ctrl+k", "pane.focus.up")
-rex.bind("ctrl+l", "pane.focus.right")
+rex.bind("ctrl+a>h", "pane.focus.left")
+rex.bind("ctrl+a>j", "pane.focus.down")
+rex.bind("ctrl+a>k", "pane.focus.up")
+rex.bind("ctrl+a>l", "pane.focus.right")
 ```
 
-This is a change from herdr, where focus is `prefix+h/j/k/l`. In Rex I moved it
-to bare `Ctrl+h/j/k/l`, so moving between panes costs one chord instead of two.
-
-It also has a price. Those four keys now belong to Rex before anything running
-in the pane sees them, and `Ctrl+l` is how a shell clears the screen. I
+This matches herdr, where focus is `prefix+h/j/k/l`. It didn't start this way. I
+first moved focus to bare `Ctrl+h/j/k/l` so moving between panes cost one chord
+instead of two, and it had a price. Those four keys belonged to Rex before
+anything running in the pane saw them, which clashed with vim-tmux-navigator in
+Neovim, and `Ctrl+l` is how a shell clears the screen. Putting focus back behind
+the prefix costs a second keypress, and nothing in the pane loses a key.
 
 ### Resize Mode
 
@@ -233,7 +238,7 @@ Here is the honest accounting, line by line against what I use today.
 - The `Ctrl+a` prefix, and every chord that starts with it.
 - Splits, and `h/j/k/l` for focus.
 - Tabs, which I barely use.
-- Sessions with next, previous, switch, back, and recent. That last one is the
+- Sessions with next, previous, and the `cmd+k` switcher. That last one is the
   nearest thing to herdr's workspace jumping.
 
 **Doesn't carry over, at least not in this file:**
@@ -285,7 +290,7 @@ This post has gaps, and I'd rather list them than hide them.
 ## So, Will It Replace Them?
 
 I don't know yet. I really enjoy Rex, and that matters more to me than any
-feature list. The keys weren't hard to fix. Fifty-eight lines got me back to
+feature list. The keys weren't hard to fix. Fifty-five lines got me back to
 something that feels like my herdr setup.
 
 What would settle it is the part the config doesn't cover:
